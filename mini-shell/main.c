@@ -6,19 +6,48 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 08:05:06 by kzerri            #+#    #+#             */
-/*   Updated: 2023/09/23 15:12:06 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/09/23 18:57:50 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+int	countRedirections(char *str, int *i)
+{
+	int j;
+
+	j = 1;
+	while (str[*i])
+	{
+		if ()		
+	}	
+}
+
 int checkRedirections(char *str)
 {
-	while ()
+	int	len;
+	int	i;
+
+	i = -1;
+	len = ft_strlen(str) - 1;
+	if (!ft_strchr("<>", str[len]))
+		return (0);
+	while (!ft_strchr("<>", str[++i]));
+	if (!str[i])
+		return (0);
+	i = -1;
+	while (str[++i])
 	{
-		
+		if (!ft_strchr("<>", str[i]))
+		{
+			i++;
+			if (!countRedirections(&str[i], &i));
+				return (0);
+		}
 	}
+	return (1);
 }
+
 int	checkAmpersand(char *str)
 {
 	while (*str)

@@ -8,7 +8,7 @@ CC			=	gcc
 
 RM			=	rm -rf
 
-SRCS		=	main.c lib/ft_strlen.c
+SRCS		=	lib/ft_strlen.c lib/ft_strchr.c main.c 
 
 OBJS		= $(SRCS:.c=.o)
 
