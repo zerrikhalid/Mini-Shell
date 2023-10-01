@@ -151,7 +151,14 @@ void	lvl2(t_tree *node, char **strs, int idx)
 	i = idx;
 	while (strs[i])
 	{
-		if (!ft_strcmp())
+		if (strs[i][0] == '>' || strs[i][0] == '<')
+		{
+			node = tree_new(strs[i]);
+			node->right = tree_new(NULL);
+			node->right->strs = ft_calloc(2, sizeof(char *));
+			node->right->strs[0] = ft_strdup(strs[i+1]);
+			lvl2(node->left, strs, i+2);
+		}
 	}
 }
 
