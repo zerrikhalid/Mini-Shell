@@ -6,11 +6,21 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:07:31 by araji-af          #+#    #+#             */
-/*   Updated: 2023/10/01 16:00:31 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/19 15:30:30 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	free_tree(t_tree *tree)
+{
+	if (!tree)
+		return ;
+	free_tree(tree->left);
+	free_all(tree->strs);
+	free(tree);
+	free_tree(tree->right);
+}
 
 char	*final_str(char *str)
 {
@@ -84,38 +94,31 @@ char	**ft_split2(char *str)
 
 int main(int ac, char **av, char **env)
 {
-	char	*str0; 
+	char	*cmd; 
 	char	**command;
 	char	*final;
 	t_tree	*tree;
+	t_data	*envi;
 
-	str0 = readline("$Minishell : ");
-	is_valide(str0);
-	final = final_str(str0);
-	command = ft_split2(final);
-	tree = NULL;
-	build_tree(&tree, command);
-	
-	printf("%s\n", final);
-	printf(" number of words is : %d\n", count_words(final));
-	int i = 0;
-	int	j;
-	while (command[i]){
-		j = 0;
-		printf("%s\n", command[i]);
-		i++;
+	envi = NULL;
+	get_environement(env, &envi);
+	// rl_initialize();
+	// rl_catch_signals = 0;
+	while(1)
+	{
+		signal(SIGINT, SIG_IGN);
+		signal(SIGQUIT, SIG_IGN);
+		cmd = readline("$Minishell: ");
+		if (!cmd)
+			break;
+		add_history(cmd);
+		if (!*cmd || !is_valide(cmd))
+			continue;
+		final = final_str(cmd);
+		command = ft_split2(final);
+		tree = NULL;
+		level1(&tree, command, 0);
+		execute(tree, envi, env);
 	}
+	free_tree(tree);
 }
-
-// int main(int ac, char **av, char **env)
-// {
-	char *string = ">> ls < \" ls -la |> \' 'wc -l'\" | \"ls\" s";
-// 	char *string1 = "ls <<< ls";
-// 	printf("%s\n", string1);
-// 	if (is_valide(string1))
-// 		printf("Is valide\n");
-// 	else
-// 	{
-// 		printf("minishell: syntax error near unexpected token `|'\n");
-// 	}
-// }

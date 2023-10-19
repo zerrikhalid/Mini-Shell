@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 15:51:38 by kzerri            #+#    #+#             */
-/*   Updated: 2023/09/26 16:33:48 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/10 14:39:17 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,11 @@ int	check_redirections(char *str)
 	i = -1;
 	len = ft_strlen(str) - 1;
 	if (!ft_strchar("<>", str[len]))
-		error(str[len]);
+		return (error(str[len]));
 	while (!ft_strchar("<>", str[++i]))
 		;
 	if (!str[i])
-		error(str[0]);
+		return (error(str[0]));
 	i = -1;
 	while (str[++i])
 	{
@@ -61,7 +61,7 @@ int	check_redirections(char *str)
 		{
 			i = count_redirections(str, i + 1, c);
 			if (!i)
-				error(c);
+				return (error(c));
 		}
 	}
 	return (1);

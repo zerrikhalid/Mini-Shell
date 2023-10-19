@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 18:29:26 by kzerri            #+#    #+#             */
-/*   Updated: 2023/09/26 15:53:37 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/09 15:40:00 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,17 @@ char	*helper2(char *str, int *i, int *start)
 {
 	char	*word;
 	char	*white_space;
+	int		j;
 
+	j = *i;
 	white_space = " \t\n";
-	while (ft_strchr(white_space, str[*i]))
-		(*i)++;
+	while (str[j] && ft_strchr(white_space, str[j]))
+		j++;
 	word = (char *)malloc(sizeof(char) * (*i - *start + 1));
 	if (word != NULL)
 	{
 		ft_strncpy(word, &str[*start], *i - *start);
+		*i = j;
 		*start = *i;
 	}
 	return (word);

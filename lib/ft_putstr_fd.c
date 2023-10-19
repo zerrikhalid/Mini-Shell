@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncpy.c                                       :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/25 17:47:09 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/18 16:06:33 by kzerri           ###   ########.fr       */
+/*   Created: 2023/01/17 01:13:06 by kzerri            #+#    #+#             */
+/*   Updated: 2023/10/08 17:43:12 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char	*ft_strncpy(char *s1, char *s2, int n)
+void	ft_putstr_fd(char *str, int fd)
 {
-	int	i;
-
-	i = -1;
-	while (++i < n && s2[i])
-		s1[i] = s2[i];
-	s1[i] = '\0';
-	return (s1);
+	if (!str)
+		return ;
+	write(fd, str, ft_strlen(str));
 }
