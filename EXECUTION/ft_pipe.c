@@ -6,11 +6,32 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 15:37:47 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/18 15:38:53 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/20 18:27:32 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+int	check_exit_state(int state)
+{
+	if (WIFSIGNALED(state))
+	{
+		if (WTERMSIG(state) == SIGQUIT)
+		{
+			printf("QUIT: ");
+			printf("%d", WTERMSIG(state));
+		}
+		printf("\n");
+		return (128 + WTERMSIG(state));
+	}
+	return (1);
+}
+
+void	sig_handler(int signal)
+{
+	g_status = check_exit_state(signal);
+	return ;
+}
 
 void	left(t_tree *tree, int fds[2], t_data *envi, char **env)
 {
@@ -48,4 +69,5 @@ void	ft_pipe(t_tree *tree, t_data *envi, char **env)
 	close(fds[1]);
 	waitpid(pid1, &g_status, 0);
 	waitpid(pid2, &g_status, 0);
+	g_status = check_exit_state(g_status);
 }

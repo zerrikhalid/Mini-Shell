@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:07:31 by araji-af          #+#    #+#             */
-/*   Updated: 2023/10/19 15:30:30 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/20 17:54:22 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,14 @@ char	*final_str(char *str)
 	index = 0;
 	if (!final)
 		return (NULL);
+	char c = 0;
 	while (*tmp && index < size * 2)
 	{
-		if (!ft_strchr(operators, *tmp))
+		if (*tmp == c)
+			c = 0;
+		if (!ft_strchar("\"\'", *tmp))
+			c = *tmp;
+		if (!ft_strchr(operators, *tmp) || c)
 			final[index++] = *tmp++;
 		else
 			process_operator(&final, &tmp, &index);
@@ -92,6 +97,17 @@ char	**ft_split2(char *str)
 	return (var.splited[var.j] = NULL, var.splited);
 }
 
+void handler(int num)
+{
+	int		fd[2];
+
+	pipe(fd);
+	dup2(fd[0], STDIN_FILENO);
+	ft_putstr_fd("\n", fd[1]);
+	close(fd[0]);
+	close(fd[1]);
+}
+
 int main(int ac, char **av, char **env)
 {
 	char	*cmd; 
@@ -99,18 +115,22 @@ int main(int ac, char **av, char **env)
 	char	*final;
 	t_tree	*tree;
 	t_data	*envi;
+	int		fdbackup;
 
 	envi = NULL;
+	fdbackup = dup(STDIN_FILENO);
 	get_environement(env, &envi);
-	// rl_initialize();
-	// rl_catch_signals = 0;
+	rl_catch_signals = 0;
 	while(1)
 	{
-		signal(SIGINT, SIG_IGN);
+		dup2(fdbackup, STDIN_FILENO);
+		signal(SIGINT, handler);
 		signal(SIGQUIT, SIG_IGN);
 		cmd = readline("$Minishell: ");
 		if (!cmd)
 			break;
+		if(!*cmd)
+			continue;
 		add_history(cmd);
 		if (!*cmd || !is_valide(cmd))
 			continue;
@@ -121,4 +141,5 @@ int main(int ac, char **av, char **env)
 		execute(tree, envi, env);
 	}
 	free_tree(tree);
+	return (0);
 }

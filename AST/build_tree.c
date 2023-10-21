@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 13:02:42 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/04 18:26:34 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/20 18:30:00 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	create_node(t_tree **node, char *s)
 {
 	*node = (t_tree *)malloc(sizeof(t_tree));
 	if (!node)
-		exit(1) ;
+		exit(1);
 	(*node)->left = NULL;
 	(*node)->right = NULL;
 	if (!s)
@@ -49,8 +49,7 @@ char	**level3(char **strs, char **cmd, int start)
 		if (strs[i][0] == '<' || strs[i][0] == '>')
 			i++;
 		else
-			cmd[++j] = ft_strdup(strs[i]);
-		i++;
+			cmd[++j] = ft_strdup(strs[i++]);
 	}
 	return (cmd);
 }
@@ -86,7 +85,7 @@ void	level2(t_tree **tree, char **strs, int start, char **cmd)
 void	level1(t_tree **tree, char **strs, int start)
 {
 	int	i;
-	
+
 	i = start;
 	while (strs[i])
 	{

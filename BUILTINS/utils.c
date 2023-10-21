@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 17:44:34 by araji-af          #+#    #+#             */
-/*   Updated: 2023/10/18 10:42:29 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/19 18:16:44 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,3 @@ char	*ft_substr(char *s, unsigned int start, size_t len)
 	a[i] = '\0';
 	return ((char *)subs);
 }
-

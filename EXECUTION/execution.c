@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 14:20:38 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/19 15:34:14 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/21 16:24:40 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,18 @@ void	cmd_execute(t_tree *tree, t_data *envi, char **env)
 	int	i;
 
 	i = -1;
+	signal(SIGINT, sig_handler);
+	signal(SIGQUIT, sig_handler);
 	if (!fork())
 	{
 		while (!tree->strs[++i] && i < tree->count)
 			;
-		if (ft_strchar(tree->strs[i], '/'))
+		printf("%d\n", envi->flag);
+		if (*tree->strs[i] && envi->flag)
+			exit(0);
+		if (tree->strs[i] && ft_strchar(tree->strs[i], '/'))
 			tree->strs[i] = get_cmd(tree->strs[i], envi);
-		if (execve(tree->strs[i], &tree->strs[i], env) == -1)
+		if (tree->strs[i] && execve(tree->strs[i], &tree->strs[i], env) == -1)
 			puts(strerror(errno));
 		exit(1);
 	}
@@ -49,9 +54,9 @@ void	check_builtin(t_tree *tree, t_data *envi, char **environement)
 	else if (tree->strs[0] && ft_strcmp(tree->strs[0], "pwd"))
 		g_status = pwd();
 	else if (tree->strs[0] && ft_strcmp(tree->strs[0], "export"))
-		g_status = export(tree->strs, &envi);
+		g_status = export(&tree->strs[1], &envi);
 	else if (tree->strs[0] && ft_strcmp(tree->strs[0], "unset"))
-		g_status = unset(tree->strs, &envi);
+		g_status = unset(&tree->strs[1], &envi);
 	else if (tree->strs[0] && ft_strcmp(tree->strs[0], "env"))
 		g_status = env(envi);
 	else if (tree->strs[0] && ft_strcmp(tree->strs[0], "exit"))

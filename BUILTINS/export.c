@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 21:04:35 by araji-af          #+#    #+#             */
-/*   Updated: 2023/10/17 17:59:19 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/19 17:33:06 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ int	export(char **av, t_data **envi)
 
 	i = 0;
 	status = 0;
+	if (!*av)
+		no_option_export(*envi);
 	while (av[i])
 	{
 		initialize_exp_variable(&exp, av[i], *envi);

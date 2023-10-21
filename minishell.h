@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 08:11:56 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/19 16:38:15 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/21 16:20:26 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct s_data
 	char			*value;
 	char			*path;
 	struct s_data	*next;
+	int				flag;
 }t_data;
 
 typedef struct s_export
@@ -76,9 +77,11 @@ typedef struct s_vars
 }t_vars;
 
 int		ft_strlen(char *str);
+char	*ft_itoa(int n);
 int		ft_strchar(char *str, char c);
 char	*ft_strchr(char *s, int c);
 char	*ft_strtrim(char *s1, char *set);
+void	sig_handler(int	signal);
 size_t	ft_strlcpy(char *dst, char *src, size_t dstsize);
 char	**ft_split2(char *str);
 void	process_operator(char **final, char **str, int *index);

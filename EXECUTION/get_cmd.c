@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 13:55:36 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/18 16:04:53 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/21 16:23:16 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ char	**get_args(char *s, char **args, t_data *env)
 	int	i;
 
 	i = -1;
+
 	while (env)
 	{
 		if (!ft_strncmp(env->variable, "PATH", 4))
@@ -41,7 +42,7 @@ char	*get_cmd(char *s, t_data *env)
 	char	**args;
 	int		i;
 
-	if (s)
+	if (s && *s)
 	{
 		args = get_args(s, args, env);
 		i = -1;
@@ -55,8 +56,6 @@ char	*get_cmd(char *s, t_data *env)
 			}
 		}
 	}
-	ft_putstr_fd("$Minishell: ", 2);
-	ft_putstr_fd(s, 2);
-	ft_putstr_fd(": command not found !\n", 2);
+	ft_printf("Minishell: %s: command not found !\n", s);
 	exit(127);
 }

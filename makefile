@@ -27,6 +27,7 @@ SRCS		=	lib/ft_strlen.c \
 				lib/ft_strncmp.c\
 				lib/ft_split.c\
 				lib/ft_strjoin.c\
+				lib/ft_itoa.c\
 				main.c\
 				PARSER/token_utils.c\
 				PARSER/token_utils2.c\
@@ -34,8 +35,6 @@ SRCS		=	lib/ft_strlen.c \
 				PARSER/isValide.c\
 				PARSER/error_print.c\
 				AST/build_tree.c\
-				get_next_line/get_next_line.c\
-				get_next_line/get_next_line_utils.c\
 				EXECUTION/execution.c\
 				EXECUTION/get_cmd.c\
 				EXECUTION/ft_pipe.c\

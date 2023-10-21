@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 18:37:08 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/18 16:05:39 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/20 17:43:17 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ void	ft_r_double_red(t_tree *tree, t_data *envi, char **env)
 		exit(1);
 	}
 	dup2(fd, 1);
-	execute(tree->right, envi, env);
+	execute(tree->left, envi, env);
 	dup2(backup_fd, STDOUT_FILENO);
 }

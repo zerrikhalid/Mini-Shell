@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 16:07:13 by araji-af          #+#    #+#             */
-/*   Updated: 2023/10/19 15:45:20 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/19 18:19:12 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ void	get_environement(char **env, t_data **environement)
 		lenght2 = 0;
 		get_start_end(env[i], &lenght1, &lenght2);
 		if (!(*environement))
-			(*environement) = ft_mylstnew(ft_substr(env[i], 0, lenght1), ft_substr(env[i], lenght1 + 1, lenght2));
+			(*environement) = ft_mylstnew(ft_substr(env[i], 0, lenght1),
+					ft_substr(env[i], lenght1 + 1, lenght2));
 		else
 		{
 			tmp = ft_mylstnew(ft_substr(env[i], 0, lenght1),
@@ -45,8 +46,8 @@ void	get_environement(char **env, t_data **environement)
 			ft_lstadd_back(environement, tmp);
 			tmp = NULL;
 		}
-	}	
-	// reset_old_pwd(environement);
+	}
+	reset_old_pwd(environement);
 }
 
 void	reset_old_pwd(t_data **envi)
@@ -58,7 +59,7 @@ void	reset_old_pwd(t_data **envi)
 	{
 		if (!my_strcmp(tmp->variable, "OLDPWD"))
 		{
-			// free(tmp->value);
+			free(tmp->value);
 			tmp->value = NULL;
 			return ;
 		}

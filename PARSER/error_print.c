@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 16:02:35 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/09 15:54:34 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/21 15:27:33 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	error(char c)
 {
-	printf("minishell: syntax error near unexpected token `%c'\n", c);
+	ft_printf("minishell: syntax error near unexpected token `%c'\n", c);
+	g_status = 258;
 	return (0);
 }

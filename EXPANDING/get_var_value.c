@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 10:39:49 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/18 13:27:31 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/21 13:59:31 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,11 @@ char	*get_var_value(char *str, int *x, t_data *env, int sig)
 	i = 0;
 	while (str[++(*x)])
 	{
+		if (str[(*x)] == '?')
+		{
+			++(*x);
+			return (ft_itoa(g_status));
+		}
 		if (str[*x] == ' ' || str[*x] == '\"' \
 		|| str[*x] == '\'' || str[*x] == '$')
 			break ;
