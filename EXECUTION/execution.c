@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 14:20:38 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/21 16:24:40 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/22 20:36:26 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,17 @@ void	free_all(char **args)
 void	cmd_execute(t_tree *tree, t_data *envi, char **env)
 {
 	int	i;
+	int	pid;
 
 	i = -1;
-	signal(SIGINT, sig_handler);
-	signal(SIGQUIT, sig_handler);
-	if (!fork())
+	pid = fork();
+	if (!pid)
 	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
 		while (!tree->strs[++i] && i < tree->count)
 			;
-		printf("%d\n", envi->flag);
-		if (*tree->strs[i] && envi->flag)
+		if (!*tree->strs[i] && tree->flag)
 			exit(0);
 		if (tree->strs[i] && ft_strchar(tree->strs[i], '/'))
 			tree->strs[i] = get_cmd(tree->strs[i], envi);
@@ -42,7 +43,8 @@ void	cmd_execute(t_tree *tree, t_data *envi, char **env)
 			puts(strerror(errno));
 		exit(1);
 	}
-	wait(0);
+	waitpid(pid, &g_status, 0);
+	g_status = check_exit_state(g_status);
 }
 
 void	check_builtin(t_tree *tree, t_data *envi, char **environement)
@@ -67,6 +69,8 @@ void	check_builtin(t_tree *tree, t_data *envi, char **environement)
 
 void	execute(t_tree *tree, t_data *env, char **environement)
 {
+	if (!tree)
+		return ;
 	if (ft_strcmp(tree->strs[0], "|"))
 		ft_pipe(tree, env, environement);
 	else if (ft_strcmp(tree->strs[0], "<"))
@@ -78,5 +82,8 @@ void	execute(t_tree *tree, t_data *env, char **environement)
 	else if (ft_strcmp(tree->strs[0], ">>"))
 		ft_r_double_red(tree, env, environement);
 	else
+	{
 		expand(tree, env, environement);
+		check_builtin(tree, env, environement);
+	}
 }

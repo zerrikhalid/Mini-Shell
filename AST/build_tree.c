@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 13:02:42 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/20 18:30:00 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/21 20:44:53 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,13 @@ char	**level3(char **strs, char **cmd, int start)
 	}
 	cmd = (char **)calloc((end - start) + 1, sizeof(char *));
 	j = -1;
-	i = start;
-	while (strs[i])
+	i = start - 1;
+	while (strs[++i])
 	{
 		if (strs[i][0] == '<' || strs[i][0] == '>')
 			i++;
 		else
-			cmd[++j] = ft_strdup(strs[i++]);
+			cmd[++j] = ft_strdup(strs[i]);
 	}
 	return (cmd);
 }
@@ -74,7 +74,7 @@ void	level2(t_tree **tree, char **strs, int start, char **cmd)
 		}
 		i++;
 	}
-	if (!(*tree))
+	if (!(*tree) && *cmd[0])
 	{
 		create_node(tree, NULL);
 		(*tree)->strs = cmd;

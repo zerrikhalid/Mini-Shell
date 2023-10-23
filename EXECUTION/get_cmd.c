@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 13:55:36 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/21 16:23:16 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/21 17:55:07 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ char	**get_args(char *s, char **args, t_data *env)
 	int	i;
 
 	i = -1;
-
 	while (env)
 	{
 		if (!ft_strncmp(env->variable, "PATH", 4))

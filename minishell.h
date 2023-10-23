@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 08:11:56 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/21 16:20:26 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/22 20:24:15 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_tree
 	struct s_tree	*right;
 	struct s_tree	*left;
 	int				count;
+	int				flag;
 }t_tree;
 
 typedef struct s_var
@@ -53,7 +54,6 @@ typedef struct s_data
 	char			*value;
 	char			*path;
 	struct s_data	*next;
-	int				flag;
 }t_data;
 
 typedef struct s_export
@@ -125,6 +125,8 @@ int		echo(char **av);
 void	get_environement(char **env, t_data **environement);
 void	reset_old_pwd(t_data **envi);
 int		env(t_data *envi);
+int		check_exit_state(int state);
+int		expand_redir(t_tree *tree, t_data *envi, char **env);
 int		check_export_args(char *str, int *status);
 int		get_var_lenght(char *str);
 int		get_value_lenght(int end, char *str);
@@ -173,6 +175,5 @@ int		ft_putchar(char c);
 int		ft_putnbr(int n);
 int		ft_putstr(const char *str);
 int		ft_isdigit(int c);
-char	*get_cmd(char *s, t_data *env);
 
 #endif

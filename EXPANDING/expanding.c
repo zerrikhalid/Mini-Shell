@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 14:21:09 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/21 16:23:50 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/22 20:42:22 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ void	push_to_s(char *tmp, int j, char *str, char *s)
 		s[j - 1] = 0;
 }
 
-int	flag(t_data *env)
+int	flag(t_tree *tree)
 {
-	return (env->flag = 1);
+	return (tree->flag = 1);
 }
 
-char	*clean_str(char *str, t_data *env)
+char	*clean_str(char *str, t_data *env, t_tree *tree)
 {
 	t_var	var;
 
@@ -58,11 +58,11 @@ char	*clean_str(char *str, t_data *env)
 			var.i = create_new_str(str, var.s, var.i + 1, env);
 		else if (str[var.i] == '\"')
 			var.i = create_new_str(str, var.s, var.i + 1, env);
-		else if (str[var.i] == '$' && flag(env))
+		else if (str[var.i] == '$' && flag(tree))
 		{
 			var.tmp = get_var_value(str, &var.i, env, 1);
 			push_to_s(var.tmp, var.j, &str[var.i], var.s);
-			if (var.tmp)
+			if (var.tmp && *var.tmp)
 				free(var.tmp);
 			continue ;
 		}
@@ -85,9 +85,8 @@ void	expand(t_tree *tree, t_data *env, char **environement)
 	while (tree->strs[++i])
 	{
 		if (check_dollar(tree->strs[i]))
-			tree->strs[i] = clean_str(tree->strs[i], env);
+			tree->strs[i] = clean_str(tree->strs[i], env, tree);
 		else
 			tree->strs[i] = remove_quotes(tree->strs[i]);
 	}
-	check_builtin(tree, env, environement);
 }

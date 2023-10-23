@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 15:37:47 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/20 18:27:32 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/21 22:58:44 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,12 @@ int	check_exit_state(int state)
 		printf("\n");
 		return (128 + WTERMSIG(state));
 	}
-	return (1);
+	return (WEXITSTATUS(state));
 }
 
 void	sig_handler(int signal)
 {
-	g_status = check_exit_state(signal);
-	return ;
+	check_exit_state(signal);
 }
 
 void	left(t_tree *tree, int fds[2], t_data *envi, char **env)
