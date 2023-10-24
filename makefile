@@ -10,7 +10,7 @@ header	=	minishell.h
 
 CC			=	gcc
 
-CFLAGS		=	$(CIFLAGS) -Wall -Wextra -Werror -lreadline
+CFLAGS		=	$(CIFLAGS) -Wall -Wextra -Werror -lreadline -fsanitize=address -g
 
 RM			=	rm -rf
 
@@ -31,6 +31,7 @@ SRCS		=	lib/ft_strlen.c \
 				main.c\
 				PARSER/token_utils.c\
 				PARSER/token_utils2.c\
+				PARSER/free_all.c\
 				PARSER/check_redirections.c\
 				PARSER/isValide.c\
 				PARSER/error_print.c\

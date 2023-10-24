@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 14:20:38 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/22 20:36:26 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/24 12:43:57 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	check_builtin(t_tree *tree, t_data *envi, char **environement)
 		cmd_execute(tree, envi, environement);
 }
 
-void	execute(t_tree *tree, t_data *env, char **environement)
+void	execute(t_tree *tree, t_data  *env, char **environement)
 {
 	if (!tree)
 		return ;

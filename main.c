@@ -6,21 +6,11 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:07:31 by araji-af          #+#    #+#             */
-/*   Updated: 2023/10/22 10:46:39 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/24 16:22:58 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	free_tree(t_tree *tree)
-{
-	if (!tree)
-		return ;
-	free_tree(tree->left);
-	free_all(tree->strs);
-	free(tree);
-	free_tree(tree->right);
-}
 
 char	*final_str(char *str)
 {
@@ -30,7 +20,7 @@ char	*final_str(char *str)
 	int		size;
 	char	*tmp;
 
-	tmp = ft_strtrim(str, " ");
+	tmp = ft_strtrim(str, " \t\n");
 	free(str);
 	str = NULL;
 	size = ft_strlen(tmp);
@@ -110,36 +100,31 @@ void handler(int num)
 
 int	main(int ac, char **av, char **env)
 {
-	char	*cmd; 
-	char	**command;
-	char	*final;
-	t_tree	*tree;
-	t_data	*envi;
-	int		fdbackup;
+	t_var var;
 
-	envi = NULL;
-	fdbackup = dup(STDIN_FILENO);
-	get_environement(env, &envi);
+	var.envi = NULL;
+	var.fdbackup = dup(STDIN_FILENO);
+	get_environement(env, &var.envi);
 	rl_catch_signals = 0;
 	while(1)
 	{
-		dup2(fdbackup, STDIN_FILENO);
+		dup2(var.fdbackup, STDIN_FILENO);
 		signal(SIGINT, handler);
 		signal(SIGQUIT, SIG_IGN);
-		cmd = readline("$Minishell: ");
-		if (!cmd)
+		var.cmd = readline("$Minishell: ");
+		if (!var.cmd)
 			break;
-		if(!*cmd)
+		if(!*var.cmd)
 			continue;
-		add_history(cmd);
-		if (!*cmd || !is_valide(cmd))
+		add_history(var.cmd);
+		if (!*var.cmd || !is_valide(var.cmd))
 			continue;
-		final = final_str(cmd);
-		command = ft_split2(final);
-		tree = NULL;
-		level1(&tree, command, 0);
-		execute(tree, envi, env);
+		var.final = final_str(var.cmd);
+		var.command = ft_split2(var.final);
+		var.tree = NULL;
+		level1(&var.tree, var.command, 0);
+		execute(var.tree, var.envi, env);
+		free_tree(var.tree);
 	}
-	free_tree(tree);
 	return (0);
 }

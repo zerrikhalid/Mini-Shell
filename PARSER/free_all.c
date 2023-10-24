@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_print.c                                      :+:      :+:    :+:   */
+/*   free_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/26 16:02:35 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/24 00:58:01 by kzerri           ###   ########.fr       */
+/*   Created: 2023/10/24 14:22:15 by kzerri            #+#    #+#             */
+/*   Updated: 2023/10/24 14:22:24 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	error(char c)
+void	free_tree(t_tree *tree)
 {
-	ft_printf("minishell: syntax error near unexpected token `%c'\n", c);
-	g_status = 258;
-	return (0);
+	if (!tree)
+		return ;
+	free_tree(tree->left);
+	free_all(tree->strs);
+	free(tree);
+	free_tree(tree->right);
 }

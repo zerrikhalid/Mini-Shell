@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 08:11:56 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/22 20:24:15 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/24 14:44:02 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <stdbool.h>
 # include <errno.h>
 # include <sys/errno.h>
+# include <dirent.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <sys/types.h>
@@ -40,14 +41,6 @@ typedef struct s_tree
 	int				flag;
 }t_tree;
 
-typedef struct s_var
-{
-	char	*s;
-	char	*tmp;
-	int		j;
-	int		i;
-}t_var;
-
 typedef struct s_data
 {
 	char			*variable;
@@ -55,6 +48,20 @@ typedef struct s_data
 	char			*path;
 	struct s_data	*next;
 }t_data;
+
+typedef struct s_var
+{
+	char	*s;
+	char	*tmp;
+	int		j;
+	int		i;
+	char	*cmd;
+	char	**command;
+	char	*final;
+	t_tree	*tree;
+	t_data	*envi;
+	int		fdbackup;
+}t_var;
 
 typedef struct s_export
 {
@@ -105,7 +112,7 @@ int		check_ampersand(char *str);
 int		is_valide(char *str);
 int		error(char c);
 char	*ft_strjoin(char *s1, char *s2);
-char	**ft_split(char const *s, char c);
+char	**ft_split(char *s, char c);
 char	**level3(char **strs, char **cmd, int start);
 void	level2(t_tree **tree, char **strs, int start, char **cmd);
 void	level1(t_tree **tree, char **strs, int start);
@@ -175,5 +182,5 @@ int		ft_putchar(char c);
 int		ft_putnbr(int n);
 int		ft_putstr(const char *str);
 int		ft_isdigit(int c);
-
+void	free_tree(t_tree *tree);
 #endif

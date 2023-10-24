@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 14:21:09 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/22 20:42:22 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/24 00:04:48 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void	expand(t_tree *tree, t_data *env, char **environement)
 	i = -1;
 	while (tree->strs[++i])
 	{
+		tree->flag = 0;
 		if (check_dollar(tree->strs[i]))
 			tree->strs[i] = clean_str(tree->strs[i], env, tree);
 		else

@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 14:33:55 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/05 14:34:46 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/23 23:24:51 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static	char	**ft_free(char **p, int j)
 	return (NULL);
 }
 
-static	int	letters_c(char const *s1, char c)
+static	int	letters_c(char *s1, char c)
 {
 	int	i;
 
@@ -37,7 +37,7 @@ static	int	letters_c(char const *s1, char c)
 	return (i);
 }
 
-static	char	**init_w(char const *s1, char c)
+static	char	**init_w(char *s1, char c)
 {
 	int		j;
 	char	**s2;
@@ -60,7 +60,7 @@ static	char	**init_w(char const *s1, char c)
 	return (s2);
 }
 
-static	char	**ft_set(char const *s1, char c)
+static	char	**ft_set(char *s1, char c)
 {
 	int		j;
 	char	**p;
@@ -87,7 +87,7 @@ static	char	**ft_set(char const *s1, char c)
 	return (p);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char *s, char c)
 {
 	char	**p;
 	int		j;

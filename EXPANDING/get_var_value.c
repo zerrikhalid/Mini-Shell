@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 10:39:49 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/22 20:39:42 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/23 22:43:53 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ char	*get_var_value(char *str, int *x, t_data *env, int sig)
 	char	*tmp;
 	int		i;
 	int		len;
-	
+
 	tmp = (char *)ft_calloc(ft_strlen(str) + 1, 1);
 	i = 0;
 	while (str[++(*x)])
