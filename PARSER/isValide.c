@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 15:46:07 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/24 13:56:07 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/25 16:30:54 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,20 +48,17 @@ int	check_pairs(char *s, char c, int start, int j)
 
 int	space_afterpipe(char *str, int i)
 {
-	char	*new;
 	int		j;
 
 	if (i)
 	{
-		new = ft_strtrim(str, " \t");
-		if (!*new)
-			return (0);
-		j = ft_strlen(new) - 1;
-		if (new[0] == '|' || new[j] == '|')
+		j = ft_strlen(str) - 1;
+		if (str[0] == '|' || str[j] == '|')
 		{
 			error('|');
-			return (free(new), 0);
+			return (0);
 		}
+		return (1);
 	}
 	while (*str == ' ' || *str == '\t')
 		str++;
@@ -87,10 +84,10 @@ int	check_pipes(char *str)
 			i = check_pairs(str, str[i], i + 1, 1);
 		if (str[i] == p && (str[i + 1] == p))
 			return (error(str[i]));
-		if ((str[i] == p && (str[i + 1] == p || !ft_strchar("<>", str[i - 1]))) \
-			|| (!ft_strchar("<>", str[i - 1]) && \
-				!space_afterpipe(&str[i + 1], 0)))
-			return (error(str[i]));
+		if (str[i] == p && ((str[i + 1] == p || !ft_strchar("<>", str[i - 1])) \
+			|| !ft_strchar("<>", str[i - 1]) \
+				&& !space_afterpipe(&str[i + 1], 0)))
+			return (error(str[i - 1]));
 		if ((str[i] == p && !space_afterpipe(&str[i + 1], 0)))
 			return (error(str[i]));
 	}
@@ -99,20 +96,24 @@ int	check_pipes(char *str)
 
 int	is_valide(char *str)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	char	*s;
 
 	i = -1;
-	while (str[++i])
+	s = ft_strtrim(str, " \t");
+	if (!*s)
+		return (0);
+	while (s[++i])
 	{
 		j = i;
-		if (str[i] == '\'' || str[i] == '\"')
-			i = check_pairs(str, str[i], i + 1, 0);
+		if (s[i] == '\'' || s[i] == '\"')
+			i = check_pairs(s, s[i], i + 1, 0);
 		if (i == -1)
-			return (error(str[j]));
+			return (error(s[j]));
 	}
-	if (!space_afterpipe(str, 1) || !check_pipes(str) || \
-		!check_ampersand(str) || !check_redirections(str))
+	if (!space_afterpipe(s, 1) || !check_pipes(s) || \
+		!check_ampersand(s) || !check_redirections(s))
 		return (0);
 	return (1);
 }
