@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:07:31 by araji-af          #+#    #+#             */
-/*   Updated: 2023/10/24 16:22:58 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/24 22:24:12 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ void handler(int num)
 {
 	int		fd[2];
 
+	rl_replace_line("", 0);
 	pipe(fd);
 	dup2(fd[0], STDIN_FILENO);
 	ft_putstr_fd("\n", fd[1]);
@@ -101,6 +102,7 @@ void handler(int num)
 int	main(int ac, char **av, char **env)
 {
 	t_var var;
+	int c;
 
 	var.envi = NULL;
 	var.fdbackup = dup(STDIN_FILENO);

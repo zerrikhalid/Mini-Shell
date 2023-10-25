@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 08:11:56 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/24 14:44:02 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/25 13:31:23 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,14 +81,20 @@ typedef struct s_vars
 	char	**splited;
 	int		in_quote;
 	char	*white_spaces;
+	char	*str;
+	char	*del;
+	int		fd;
+	int		backup_fd;
+	char	*s;
 }t_vars;
+
 
 int		ft_strlen(char *str);
 char	*ft_itoa(int n);
 int		ft_strchar(char *str, char c);
 char	*ft_strchr(char *s, int c);
 char	*ft_strtrim(char *s1, char *set);
-void	sig_handler(int	signal);
+void	sig_handler(int signal);
 size_t	ft_strlcpy(char *dst, char *src, size_t dstsize);
 char	**ft_split2(char *str);
 void	process_operator(char **final, char **str, int *index);
@@ -158,6 +164,7 @@ void	ft_lstadd_back(t_data **lst, t_data *new);
 t_data	*ft_lstlast(t_data *lst);
 char	*ft_substr(char *s, unsigned int start, size_t len);
 char	*get_var_value(char *str, int *x, t_data *env, int sig);
+char	*clean_str(char *str, t_data *env, t_tree *tree);
 char	*remove_quotes(char *str);
 int		allocation(char *str, t_data *env);
 int		create_new_str(char *str, char *s, int i, t_data *env);
