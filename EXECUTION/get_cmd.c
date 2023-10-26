@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 13:55:36 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/23 23:57:06 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/26 12:58:59 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ char	*get_cmd(char *s, t_data *env)
 			}
 		}
 	}
+	else
+		s = ft_strdup("");
 	ft_printf("Minishell: %s: command not found !\n", s);
 	exit(127);
 }

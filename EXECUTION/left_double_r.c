@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 18:37:11 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/25 14:07:31 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/26 03:12:01 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	ft_l_double_red(t_tree *tree, t_data *envi, char **env)
 	var.s = random_file("/tmp/HERDOC", ++i);
 	var.backup_fd = dup(STDIN_FILENO);
 	var.fd = open(var.s, O_CREAT | O_RDWR | O_TRUNC, 0644);
-	var.del = ft_strdup(tree->right->strs[0]);
+	var.del = clean_str(tree->right->strs[0], envi, tree->right);
 	while (1)
 	{
 		signal(SIGINT, signale_handler);

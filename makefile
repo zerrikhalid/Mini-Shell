@@ -48,6 +48,7 @@ SRCS		=	lib/ft_strlen.c \
 				EXPANDING/get_var_value.c\
 				EXPANDING/remove_quotes.c\
 				EXPANDING/size_exp.c\
+				EXPANDING/isDollar.c\
 				BUILTINS/cd_cmd.c\
 				BUILTINS/echo.c\
 				BUILTINS/env.c\

@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 08:11:56 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/25 13:31:23 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/26 16:23:59 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,18 @@ typedef struct s_tree
 	int				count;
 	int				flag;
 }t_tree;
+
+typedef struct s_v
+{
+	int		i;
+	int		j;
+	char	**strs;
+	char	**tmp;
+	int		c;
+	int		len;
+	int		y;
+}t_v;
+
 
 typedef struct s_data
 {
@@ -87,7 +99,6 @@ typedef struct s_vars
 	int		backup_fd;
 	char	*s;
 }t_vars;
-
 
 int		ft_strlen(char *str);
 char	*ft_itoa(int n);
@@ -190,4 +201,7 @@ int		ft_putnbr(int n);
 int		ft_putstr(const char *str);
 int		ft_isdigit(int c);
 void	free_tree(t_tree *tree);
+void	fill_final(char **final, char **tmp, int *index, char *operators);
+void	dollar_valid(t_tree *tree, t_v *v, t_data *env);
+
 #endif

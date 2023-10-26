@@ -6,24 +6,11 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 14:21:09 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/24 00:04:48 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/26 16:24:58 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-int	check_dollar(char *str)
-{
-	int	i;
-
-	i = -1;
-	while (str[++i])
-	{
-		if (str[i] == '$' && str[i + 1] != '$' && str[i + 1])
-			return (1);
-	}
-	return (0);
-}
 
 void	push_to_s(char *tmp, int j, char *str, char *s)
 {
@@ -75,19 +62,18 @@ char	*clean_str(char *str, t_data *env, t_tree *tree)
 
 void	expand(t_tree *tree, t_data *env, char **environement)
 {
-	int		i;
+	t_v	v;
 
-	i = -1;
-	while (tree->strs[++i])
+	v.i = -1;
+	while (tree->strs[++v.i])
 		;
-	tree->count = i;
-	i = -1;
-	while (tree->strs[++i])
-	{
-		tree->flag = 0;
-		if (check_dollar(tree->strs[i]))
-			tree->strs[i] = clean_str(tree->strs[i], env, tree);
-		else
-			tree->strs[i] = remove_quotes(tree->strs[i]);
-	}
+	v.c = -1;
+	while (tree->strs[++v.c])
+		v.len += allocation(tree->strs[v.c], env);
+	v.strs = (char **)calloc((v.i * v.len) + 1, sizeof(char *));
+	v.i = -1;
+	v.j = 0;
+	while (tree->strs[++v.i])
+		dollar_valid(tree, &v, env);
+	tree->strs = v. strs;
 }

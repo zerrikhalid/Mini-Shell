@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:07:31 by araji-af          #+#    #+#             */
-/*   Updated: 2023/10/24 22:24:12 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/26 15:46:56 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,8 @@ char	*final_str(char *str)
 	index = 0;
 	if (!final)
 		return (NULL);
-	char c = 0;
 	while (*tmp && index < size * 2)
-	{
-		if (*tmp == c)
-			c = 0;
-		if (!ft_strchar("\"\'", *tmp))
-			c = *tmp;
-		if (!ft_strchr(operators, *tmp) || c)
-			final[index++] = *tmp++;
-		else
-			process_operator(&final, &tmp, &index);
-	}
+		fill_final(&final, &tmp, &index, operators);
 	return (final);
 }
 
@@ -84,10 +74,11 @@ char	**ft_split2(char *str)
 			* ((var.i - var.start) + 1));
 		ft_strncpy(var.splited[var.j++], &str[var.start], var.i - var.start);
 	}
-	return (var.splited[var.j] = NULL, var.splited);
+	var.splited[var.j] = NULL;
+	return (var.splited);
 }
 
-void handler(int num)
+void	handler(int num)
 {
 	int		fd[2];
 
@@ -101,26 +92,26 @@ void handler(int num)
 
 int	main(int ac, char **av, char **env)
 {
-	t_var var;
-	int c;
+	t_var	var;
+	int		c;
 
 	var.envi = NULL;
 	var.fdbackup = dup(STDIN_FILENO);
 	get_environement(env, &var.envi);
 	rl_catch_signals = 0;
-	while(1)
+	while (1)
 	{
 		dup2(var.fdbackup, STDIN_FILENO);
 		signal(SIGINT, handler);
 		signal(SIGQUIT, SIG_IGN);
 		var.cmd = readline("$Minishell: ");
 		if (!var.cmd)
-			break;
-		if(!*var.cmd)
-			continue;
+			break ;
+		if (!*var.cmd)
+			continue ;
 		add_history(var.cmd);
 		if (!*var.cmd || !is_valide(var.cmd))
-			continue;
+			continue ;
 		var.final = final_str(var.cmd);
 		var.command = ft_split2(var.final);
 		var.tree = NULL;

@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 15:37:47 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/23 18:44:35 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/26 11:16:44 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ void	ft_pipe(t_tree *tree, t_data *envi, char **env)
 	close(fds[0]);
 	close(fds[1]);
 	waitpid(pid1, &g_status, 0);
-	g_status = check_exit_state(g_status);
 	waitpid(pid2, &g_status, 0);
 	g_status = check_exit_state(g_status);
 }

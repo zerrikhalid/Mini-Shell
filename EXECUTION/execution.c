@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 14:20:38 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/25 15:36:30 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/26 16:40:29 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,22 +24,18 @@ void	free_all(char **args)
 
 void	cmd_execute(t_tree *tree, t_data *envi, char **env)
 {
-	int	i;
 	int	pid;
 
-	i = -1;
 	pid = fork();
 	if (!pid)
 	{
 		signal(SIGINT, SIG_DFL);
 		signal(SIGQUIT, SIG_DFL);
-		while (!tree->strs[++i] && i < tree->count)
-			;
-		if (!*tree->strs[i] && tree->flag)
+		if (!tree->strs[0])
 			exit(0);
-		if (tree->strs[i] && ft_strchar(tree->strs[i], '/'))
-			tree->strs[i] = get_cmd(tree->strs[i], envi);
-		if (tree->strs[i] && execve(tree->strs[i], &tree->strs[i], env) == -1)
+		if (ft_strchar(tree->strs[0], '/'))
+			tree->strs[0] = get_cmd(tree->strs[0], envi);
+		if (execve(tree->strs[0], tree->strs, env) == -1)
 			puts(strerror(errno));
 		exit(1);
 	}
