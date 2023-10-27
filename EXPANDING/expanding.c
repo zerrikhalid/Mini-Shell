@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 14:21:09 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/26 16:24:58 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/27 16:32:04 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,9 @@ void	expand(t_tree *tree, t_data *env, char **environement)
 	v.j = 0;
 	while (tree->strs[++v.i])
 		dollar_valid(tree, &v, env);
-	tree->strs = v. strs;
+	tree->strs = v.strs;
+	int i = -1;
+	while (tree->strs[++i])
+		printf("%s\n", tree->strs[i]);
+	exit(0);
 }

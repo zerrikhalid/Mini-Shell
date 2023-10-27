@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 08:11:56 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/26 16:23:59 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/27 14:55:35 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,21 +107,11 @@ char	*ft_strchr(char *s, int c);
 char	*ft_strtrim(char *s1, char *set);
 void	sig_handler(int signal);
 size_t	ft_strlcpy(char *dst, char *src, size_t dstsize);
-char	**ft_split2(char *str);
 void	process_operator(char **final, char **str, int *index);
-void	count_word_helper(char **str, int *in_quote, char *c, int *count);
-char	*ft_strncpy(char *s1, char *s2, int n);
-void	check_op(char **str, int *i, int *in_quote, char *c);
-void	helper(int *in_quote, int *i, int *j, int *start);
-char	*helper2(char *str, int *i, int *start);
-void	helper3(char *str, int *in_quote, int *i, char *c);
-void	helper4(int *in_quote, int *i, char *c);
 void	*ft_calloc(size_t count, size_t size);
 void	ft_bzero(void *b, size_t n);
 int		ft_strcmp(char *s1, char *s2);
-char	*get_str_ready(char *str);
 char	*final_str(char *str);
-int		count_words(char *str);
 void	free_all(char **args);
 int		count_redirections(char *str, int start, char c);
 int		check_redirections(char *str);
@@ -130,6 +120,7 @@ int		is_valide(char *str);
 int		error(char c);
 char	*ft_strjoin(char *s1, char *s2);
 char	**ft_split(char *s, char c);
+char	**ft_strtok(char *s);
 char	**level3(char **strs, char **cmd, int start);
 void	level2(t_tree **tree, char **strs, int start, char **cmd);
 void	level1(t_tree **tree, char **strs, int start);
@@ -141,7 +132,8 @@ void	ft_right_red(t_tree *tree, t_data *envi, char **env);
 void	ft_left_red(t_tree *tree, t_data *envi, char **env);
 void	ft_r_double_red(t_tree *tree, t_data *envi, char **env);
 void	ft_pipe(t_tree *tree, t_data *envi, char **env);
-void	ft_l_double_red(t_tree *tree, t_data *envi, char **env);
+void	ft_l_double_red(t_tree *tree, t_data *envi);
+int		get_herdoc_file_name(t_tree *tree, t_data *envi);
 void	ft_putstr_fd(char *str, int fd);
 int		ft_strncmp(char *s1, char *s2, size_t n);
 int		cd(char *path, t_data **envi);

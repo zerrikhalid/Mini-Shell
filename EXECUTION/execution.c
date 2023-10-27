@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 14:20:38 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/26 16:40:29 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/27 13:49:26 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	execute(t_tree *tree, t_data *env, char **environement)
 	else if (ft_strcmp(tree->strs[0], ">"))
 		ft_right_red(tree, env, environement);
 	else if (ft_strcmp(tree->strs[0], "<<"))
-		ft_l_double_red(tree, env, environement);
+		ft_left_red(tree, env, environement);
 	else if (ft_strcmp(tree->strs[0], ">>"))
 		ft_r_double_red(tree, env, environement);
 	else

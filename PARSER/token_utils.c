@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 18:29:26 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/09 15:40:00 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/27 14:38:21 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,56 +31,31 @@ void	process_operator(char **final, char **str, int *index)
 	(*str)++;
 }
 
-void	count_word_helper(char **str, int *in_quote, char *c, int *count)
+void	fill_final(char **final, char **tmp, int *index, char *operators)
 {
-	char	*white_spaces;
+	char	c;
+	char	*oprators;
 
-	white_spaces = " \t\n";
-	if ((**str == '\'' || **str == '\"') && !*in_quote)
+	c = 0;
+	if (ft_strchr("'\'\"", *(*tmp)))
 	{
-		*in_quote = 1;
-		*c = *(*str)++;
+		c = *(*tmp);
+		(*final)[(*index)++] = *(*tmp)++;
+		while (*tmp && *(*tmp) != c)
+			(*final)[(*index)++] = *(*tmp)++;
+		(*final)[(*index)++] = *(*tmp)++;
 	}
-	else if (*(*str) == *c && *in_quote)
+	else if (ft_strchr(operators, *(*tmp)))
 	{
-		*in_quote = 0;
-		*c = 0;
-		(*str)++;
-	}
-	else if (ft_strchr(white_spaces, *(*str)) && !*in_quote)
-	{
-		while (ft_strchr(white_spaces, *(*str)))
-			(*str)++;
-		(*count)++;
+		if (*(*tmp) == '>' || *(*tmp) == '<')
+			process_operator(final, tmp, index);
+		else
+		{
+			(*final)[(*index)++] = ' ';
+			(*final)[(*index)++] = *(*tmp)++;
+			(*final)[(*index)++] = ' ';
+		}
 	}
 	else
-		(*str)++;
-}
-
-void	helper(int *in_quote, int *i, int *j, int *start)
-{
-	*in_quote = 0;
-	*i = 0;
-	*j = 0;
-	*start = 0;
-}
-
-char	*helper2(char *str, int *i, int *start)
-{
-	char	*word;
-	char	*white_space;
-	int		j;
-
-	j = *i;
-	white_space = " \t\n";
-	while (str[j] && ft_strchr(white_space, str[j]))
-		j++;
-	word = (char *)malloc(sizeof(char) * (*i - *start + 1));
-	if (word != NULL)
-	{
-		ft_strncpy(word, &str[*start], *i - *start);
-		*i = j;
-		*start = *i;
-	}
-	return (word);
+		(*final)[(*index)++] = *(*tmp)++;
 }

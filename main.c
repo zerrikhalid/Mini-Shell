@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:07:31 by araji-af          #+#    #+#             */
-/*   Updated: 2023/10/26 15:46:56 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/27 16:36:28 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ char	*final_str(char *str)
 	tmp = ft_strtrim(str, " \t\n");
 	free(str);
 	str = NULL;
+	str = tmp;
 	size = ft_strlen(tmp);
 	operators = "<|>";
 	final = ft_calloc((size * 2) + 1, 1);
@@ -31,51 +32,7 @@ char	*final_str(char *str)
 		return (NULL);
 	while (*tmp && index < size * 2)
 		fill_final(&final, &tmp, &index, operators);
-	return (final);
-}
-
-int	count_words(char *str)
-{
-	int		count;
-	int		in_quote;
-	char	c;
-
-	count = 0;
-	in_quote = 0;
-	while (*str)
-		count_word_helper(&str, &in_quote, &c, &count);
-	if (!in_quote)
-		count++;
-	return (count);
-}
-
-char	**ft_split2(char *str)
-{
-	t_vars	var;
-
-	var.white_spaces = " \t\n";
-	helper(&var.in_quote, &var.i, &var.j, &var.start);
-	var.count = count_words(str);
-	var.splited = (char **)malloc(sizeof(char *) * (var.count + 1));
-	while (str[var.i])
-	{
-		if ((str[var.i] == '\'' || str[var.i] == '\"') && !var.in_quote)
-			helper3(str, &var.in_quote, &var.i, &var.c);
-		else if (str[var.i] == var.c && var.in_quote)
-			helper4(&var.in_quote, &var.i, &var.c);
-		else if (ft_strchr(var.white_spaces, str[var.i]) && !var.in_quote)
-			var.splited[var.j++] = helper2(str, &var.i, &var.start);
-		else
-			var.i++;
-	}
-	if (!var.in_quote)
-	{
-		var.splited[var.j] = (char *)malloc(sizeof(char) \
-			* ((var.i - var.start) + 1));
-		ft_strncpy(var.splited[var.j++], &str[var.start], var.i - var.start);
-	}
-	var.splited[var.j] = NULL;
-	return (var.splited);
+	return (free(str), final);
 }
 
 void	handler(int num)
@@ -113,11 +70,22 @@ int	main(int ac, char **av, char **env)
 		if (!*var.cmd || !is_valide(var.cmd))
 			continue ;
 		var.final = final_str(var.cmd);
-		var.command = ft_split2(var.final);
+		puts()
+		var.command = ft_strtok(var.final);
+		int i = -1;
+		while (var.command[++i])
+			puts(var.command[i]);
+		exit(0);
 		var.tree = NULL;
 		level1(&var.tree, var.command, 0);
+		if (get_herdoc_file_name(var.tree, var.envi) == -1)
+		{
+			g_status = 1;
+			continue ;
+		}
 		execute(var.tree, var.envi, env);
 		free_tree(var.tree);
 	}
+	close(var.fdbackup);
 	return (0);
 }
