@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 08:11:56 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/27 14:55:35 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/28 14:19:15 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,9 @@ typedef struct s_var
 	char	*tmp;
 	int		j;
 	int		i;
+	int		y;
 	char	*cmd;
+	char	*fr;
 	char	**command;
 	char	*final;
 	t_tree	*tree;
@@ -94,6 +96,7 @@ typedef struct s_vars
 	int		in_quote;
 	char	*white_spaces;
 	char	*str;
+	char	*trimmed;
 	char	*del;
 	int		fd;
 	int		backup_fd;
@@ -166,7 +169,7 @@ t_data	*ft_mylstnew(char *content, char *content2);
 void	ft_lstadd_back(t_data **lst, t_data *new);
 t_data	*ft_lstlast(t_data *lst);
 char	*ft_substr(char *s, unsigned int start, size_t len);
-char	*get_var_value(char *str, int *x, t_data *env, int sig);
+char	*get_var_value(char *str, int *x, t_data *env);
 char	*clean_str(char *str, t_data *env, t_tree *tree);
 char	*remove_quotes(char *str);
 int		allocation(char *str, t_data *env);
@@ -188,6 +191,7 @@ int		hexa_lower(unsigned int nbr);
 int		hexa_upper(unsigned int nbr);
 int		unsigned_forme(unsigned int nbr);
 int		print_pointer(uintptr_t n);
+char	*remove_quotes_h(char *str, int *x);
 int		ft_putchar(char c);
 int		ft_putnbr(int n);
 int		ft_putstr(const char *str);
@@ -195,5 +199,12 @@ int		ft_isdigit(int c);
 void	free_tree(t_tree *tree);
 void	fill_final(char **final, char **tmp, int *index, char *operators);
 void	dollar_valid(t_tree *tree, t_v *v, t_data *env);
+char	**ft_split2(char *str);
+void	helper(int *in_quote, int *i, int *j, int *start);
+char	*helper2(char *str, int *i, int *start);
+char	*ft_strncpy(char *s1, char *s2, int n);
+char	*clean_str_h(char *str, t_data *envi);
+void	free_vars(t_vars *var);
+void	free_var(char *str);
 
 #endif

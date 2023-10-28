@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 18:37:02 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/26 22:26:50 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/28 03:59:23 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void	ft_right_red(t_tree *tree, t_data *envi, char **env)
 	if (fd < 0)
 	{
 		perror(tree->right->strs[0]);
-		exit(1);
+		g_status = 1;
+		return ;
 	}
 	dup2(fd, STDOUT_FILENO);
 	execute(tree->left, envi, env);

@@ -6,21 +6,11 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 14:20:38 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/27 13:49:26 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/28 03:56:51 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-void	free_all(char **args)
-{
-	int	i;
-
-	i = -1;
-	while (args[++i])
-		free(args[i]);
-	free(args);
-}
 
 void	cmd_execute(t_tree *tree, t_data *envi, char **env)
 {
@@ -35,8 +25,8 @@ void	cmd_execute(t_tree *tree, t_data *envi, char **env)
 			exit(0);
 		if (ft_strchar(tree->strs[0], '/'))
 			tree->strs[0] = get_cmd(tree->strs[0], envi);
-		if (execve(tree->strs[0], tree->strs, env) == -1)
-			puts(strerror(errno));
+		execve(tree->strs[0], tree->strs, env);
+		puts(strerror(errno));
 		exit(1);
 	}
 	waitpid(pid, &g_status, 0);

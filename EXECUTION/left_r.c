@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 18:37:05 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/27 14:23:05 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/27 20:59:04 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ void	ft_left_red(t_tree *tree, t_data *envi, char **env)
 	dup2(fd, STDIN_FILENO);
 	execute(tree->left, envi, env);
 	dup2(backup_fd, STDIN_FILENO);
-	if (ft_strcmp(tree->strs[0], "<<"))
-		unlink(tree->right->strs[0]);
 	close(backup_fd);
 	close(fd);
 }

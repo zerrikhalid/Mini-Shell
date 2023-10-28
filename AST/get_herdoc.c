@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 11:54:03 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/27 14:25:25 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/28 13:37:48 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,11 @@ int	get_herdoc_file_name(t_tree *tree, t_data *envi)
 	if (!tree)
 		return (0);
 	if (ft_strcmp(tree->strs[0], "<<"))
-		ft_l_double_red(tree, envi);
+ 		ft_l_double_red(tree, envi);
 	if (g_status == -1)
 		return (-1);
 	get_herdoc_file_name(tree->left, envi);
-	get_herdoc_file_name(tree->right, envi);
+	if (g_status == -1)
+		return (-1);
 	return (0);
 }

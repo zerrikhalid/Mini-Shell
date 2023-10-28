@@ -8,7 +8,7 @@ CIFLAGS= -I$(RLP)/include
 
 header	=	minishell.h
 
-CC			=	gcc
+CC			=	cc
 
 CFLAGS		=	$(CIFLAGS) -Wall -Wextra -Werror -lreadline
 
@@ -34,6 +34,7 @@ SRCS		=	lib/ft_strlen.c \
 				PARSER/check_redirections.c\
 				PARSER/isValide.c\
 				PARSER/error_print.c\
+				PARSER/ft_split2.c\
 				AST/build_tree.c\
 				AST/get_herdoc.c\
 				EXECUTION/execution.c\

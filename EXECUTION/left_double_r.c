@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 18:37:11 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/27 14:26:39 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/28 13:46:42 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,14 @@ void	signale_handler(int num)
 	g_status = -1;
 }
 
-int	check_signal(t_vars var)
+int	check_signal(t_vars *var)
 {
-	dup2(var.backup_fd, STDIN_FILENO);
+	var->backup_fd = dup(STDIN_FILENO);
 	if (g_status == -1)
 	{
-		unlink(var.s);
+		free_vars(var);
+		dup2(var->backup_fd, STDIN_FILENO);
+		close(var->backup_fd);
 		return (1);	
 	}
 	return (0);
@@ -66,20 +68,22 @@ void	ft_l_double_red(t_tree *tree, t_data *envi)
 
 	var.s = random_file("/tmp/HERDOC", ++i, "HERDOC");
 	var.fd = open(var.s, O_CREAT | O_RDWR | O_TRUNC, 0644);
-	var.del = clean_str(tree->right->strs[0], envi, tree->right);
+	var.del = remove_quotes_h(tree->right->strs[0], &var.i);
 	while (1)
 	{
 		signal(SIGINT, signale_handler);
-		if (check_signal(var))
+		if (check_signal(&var))
 			return ;
 		var.str = readline("> ");
-		if (!var.str || ft_strcmp(var.str, var.del))	
+		if (!var.str || ft_strcmp(var.str, var.del))
 			break ;
-		var.str = clean_str(var.str, envi, tree);
+		if (!var.i)
+			var.str = clean_str_h(var.str, envi);
 		ft_putstr_fd(var.str, var.fd);
 		ft_putstr_fd("\n", var.fd);
 		free(var.str);
 	}
 	free(tree->right->strs[0]);
-	tree->right->strs[0] = var.s;
+	tree->right->strs[0] = ft_strdup(var.s);
+	free_vars(&var);
 }

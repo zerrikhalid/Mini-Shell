@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 14:21:09 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/27 16:32:04 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/28 14:13:56 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ void	push_to_s(char *tmp, int j, char *str, char *s)
 {
 	if (!tmp)
 		return ;
-	if (s[j - 1] && s[j - 1] != ' ' && *tmp == ' ')
+	if (j >= 1 && s[j - 1] && s[j - 1] != ' ' && *tmp == ' ')
 		s[j++] = *tmp++;
 	else if (*tmp == ' ')
 		tmp++;
 	while (*tmp)
 		s[j++] = *tmp++;
-	if ((*str == ' ' || !*str) && *(tmp - 1) == ' ')
+	if (*str && (*str == ' ' || !*str) && *(tmp - 1) == ' ')
 		s[j - 1] = 0;
 }
 
@@ -47,7 +47,7 @@ char	*clean_str(char *str, t_data *env, t_tree *tree)
 			var.i = create_new_str(str, var.s, var.i + 1, env);
 		else if (str[var.i] == '$' && flag(tree))
 		{
-			var.tmp = get_var_value(str, &var.i, env, 1);
+			var.tmp = get_var_value(str, &var.i, env);
 			push_to_s(var.tmp, var.j, &str[var.i], var.s);
 			if (var.tmp && *var.tmp)
 				free(var.tmp);
@@ -57,7 +57,7 @@ char	*clean_str(char *str, t_data *env, t_tree *tree)
 			var.s[var.j++] = str[var.i];
 		var.i++;
 	}
-	return (var.s);
+	return (free_var(str), var.s);
 }
 
 void	expand(t_tree *tree, t_data *env, char **environement)
@@ -75,9 +75,6 @@ void	expand(t_tree *tree, t_data *env, char **environement)
 	v.j = 0;
 	while (tree->strs[++v.i])
 		dollar_valid(tree, &v, env);
+	free_all(tree->strs);
 	tree->strs = v.strs;
-	int i = -1;
-	while (tree->strs[++i])
-		printf("%s\n", tree->strs[i]);
-	exit(0);
 }

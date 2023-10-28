@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:07:31 by araji-af          #+#    #+#             */
-/*   Updated: 2023/10/27 16:36:28 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/28 14:32:32 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,21 +70,19 @@ int	main(int ac, char **av, char **env)
 		if (!*var.cmd || !is_valide(var.cmd))
 			continue ;
 		var.final = final_str(var.cmd);
-		puts()
-		var.command = ft_strtok(var.final);
+		var.command = ft_split2(var.final);
 		int i = -1;
-		while (var.command[++i])
-			puts(var.command[i]);
-		exit(0);
 		var.tree = NULL;
 		level1(&var.tree, var.command, 0);
 		if (get_herdoc_file_name(var.tree, var.envi) == -1)
 		{
 			g_status = 1;
+			free_tree(var.tree);
 			continue ;
 		}
 		execute(var.tree, var.envi, env);
 		free_tree(var.tree);
+		free_all(var.command);
 	}
 	close(var.fdbackup);
 	return (0);

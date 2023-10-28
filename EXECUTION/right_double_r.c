@@ -6,43 +6,48 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 18:37:08 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/27 16:28:27 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/28 13:48:44 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	expand_redir(t_tree *tree, t_data *envi, char **env)
+int	ambiguous_double(t_tree *tree, char *s)
 {
-	char	*s;
-	int		i;
+	int	i;
 
 	i = -1;
-	s = ft_strdup(tree->strs[0]);
-	expand(tree, envi, env);
-	puts("cd");
 	while (tree->strs[++i])
-		puts("cd");
-	puts("cd");
-	
+		;
 	if (i > 1)
 	{
 		ft_printf("minishell: %s: ambiguous redirect\n", s);
 		g_status = 1;
-		return (free(s), 1);
+		return (1);
 	}
-	else if (tree->flag && !tree->strs[0])
+	return (0);
+}
+
+int	expand_redir(t_tree *tree, t_data *envi, char **env)
+{
+	char	*s;
+
+	s = ft_strdup(tree->strs[0]);
+	expand(tree, envi, env);
+	if (tree->flag && !tree->strs[0])
 	{
 		ft_printf("minishell: %s: ambiguous redirect\n", s);
 		g_status = 1;
 		return (free(s), 1);
 	}
-	else if (!tree->strs[0])
+	if (!*tree->strs[0])
 	{
 		ft_printf("minishell: : No such file or directory\n");
 		g_status = 1;
 		return (free(s), 1);
 	}
+	if (ambiguous_double(tree, s))
+		return (free(s), 1);
 	return (free(s), 0);
 }
 
