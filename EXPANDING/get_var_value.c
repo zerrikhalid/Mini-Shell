@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 10:39:49 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/28 01:26:55 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/29 22:37:12 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,16 @@ char	*var_search(t_data *env, char *tmp, int len)
 	{
 		if (!ft_strncmp(env->variable, tmp, len))
 		{
-			if (!env->value)
-				return (NULL);
+			if (!*env->value)
+				return (free(tmp), NULL);
+			free(tmp);
 			tmp = ft_strdup(env->value);
 			break ;
 		}
 		env = env->next;
 	}
 	if (!env)
-		return ("\0");
+		return (free(tmp), ft_strdup("\0"));
 	return (tmp);
 }
 
@@ -56,7 +57,7 @@ char	*get_var_value(char *str, int *x, t_data *env)
 		if (str[(*x)] == '?')
 		{
 			++(*x);
-			return (ft_itoa(g_status));
+			return (free(tmp), ft_itoa(g_status));
 		}
 		if (str[*x] == ' ' || str[*x] == '\"' \
 		|| str[*x] == '\'' || str[*x] == '$')

@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 18:29:26 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/27 18:21:53 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/29 21:54:21 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ char	*helper2(char *str, int *i, int *start)
 		j++;
 	word = (char *)malloc(sizeof(char) * (*i - *start + 1));
 	if (!word)
-		return NULL;
+		return (NULL);
 	if (word != NULL)
 	{
 		ft_strncpy(word, &str[*start], *i - *start);

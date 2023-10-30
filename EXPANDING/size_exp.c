@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 10:34:53 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/28 13:57:55 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/29 21:51:28 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	len(char *str, t_data *env)
 		tmp[i++] = *str++;
 	}
 	if (!*tmp)
-		return (free(tmp) ,0);
+		return (free(tmp), 0);
 	len = ft_strlen(tmp);
 	while (env)
 	{
@@ -50,7 +50,7 @@ int	allocation(char *str, t_data *env)
 	i = ft_strlen(str);
 	while (*str)
 	{
-		if (*str == '$' &&  *(str + 1) && *(str + 1) != '$')
+		if (*str == '$' && *(str + 1) && *(str + 1) != '$')
 			i += len(++str, env);
 		str++;
 	}

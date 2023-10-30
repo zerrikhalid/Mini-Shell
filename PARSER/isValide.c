@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 15:46:07 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/26 02:26:38 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/29 21:54:07 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,10 +108,10 @@ int	is_valide(char *str)
 		if (s[i] == '\'' || s[i] == '\"')
 			i = check_pairs(s, s[i], i + 1, 0);
 		if (i == -1)
-			return (error(s[j]));
+			return (free(s), free(str), error(s[j]));
 	}
 	if (!space_afterpipe(s, 1) || !check_pipes(s) || \
 		!check_ampersand(s) || !check_redirections(s))
-		return (0);
-	return (1);
+		return (free(s), free(str), 0);
+	return (free(s), 1);
 }

@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 18:15:38 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/27 18:32:02 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/29 21:52:30 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static void	count_word_helper(char **str, int *in_quote, char *c, int *count)
 	else
 		(*str)++;
 }
+
 static void	helper3(char *str, int *in_quote, int *i, char *c)
 {
 	*in_quote = 1;

@@ -8,9 +8,9 @@ CIFLAGS= -I$(RLP)/include
 
 header	=	minishell.h
 
-CC			=	cc
+CC			=	gcc
 
-CFLAGS		=	$(CIFLAGS) -Wall -Wextra -Werror -lreadline
+CFLAGS		=	$(CIFLAGS) -Wall -Wextra -Werror -ggdb3 -lreadline
 
 RM			=	rm -rf
 
@@ -71,7 +71,7 @@ $(NAME)		: $(OBJS) $(header)
 			$(CC) $(CFLAGS) $(OBJS)  $(LDFLAGS) -o $(NAME)
 
 %o:%c $(header)
-	$(CC) $(CIFLAGS) -c $< -o $@
+	$(CC) -ggdb3 $(CIFLAGS) -c $< -o $@
 
 all			:	$(NAME)
 

@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 18:37:11 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/28 13:46:42 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/29 21:57:25 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,29 +16,34 @@ char	*random_file(char *s, int i, char *herdoc)
 {
 	DIR				*dir;
 	struct dirent	*entry_point;
+	char			*str;
+	char			*n;
 
-	char *str = ft_strdup(s);
+	str = ft_strdup(s);
+	n = ft_itoa(i);
 	dir = opendir("/tmp");
 	if (!dir)
 	{
 		ft_printf("Directory you trying to open doesn\'t exist !\n");
-		return NULL;
+		return (NULL);
 	}
-	while ((entry_point = readdir(dir)))
+	entry_point = readdir(dir);
+	while (entry_point)
 	{
 		if (!ft_strncmp(entry_point->d_name, herdoc, 6))
 		{
-			str = ft_strjoin(str, ft_itoa(i));
-			return (closedir(dir), str);
+			str = ft_strjoin(str, n);
+			return (closedir(dir), free(n), str);
 		}
+		entry_point = readdir(dir);
 	}
-	return (closedir(dir), str);
+	return (closedir(dir), free(n), str);
 }
 
 void	signale_handler(int num)
 {
-	int fds[2];
-	
+	int	fds[2];
+
 	pipe(fds);
 	rl_replace_line("", 0);
 	dup2(fds[0], STDIN_FILENO);
@@ -56,7 +61,7 @@ int	check_signal(t_vars *var)
 		free_vars(var);
 		dup2(var->backup_fd, STDIN_FILENO);
 		close(var->backup_fd);
-		return (1);	
+		return (1);
 	}
 	return (0);
 }
@@ -64,7 +69,7 @@ int	check_signal(t_vars *var)
 void	ft_l_double_red(t_tree *tree, t_data *envi)
 {
 	t_vars		var;
-	static	int	i;
+	static int	i;
 
 	var.s = random_file("/tmp/HERDOC", ++i, "HERDOC");
 	var.fd = open(var.s, O_CREAT | O_RDWR | O_TRUNC, 0644);
@@ -86,4 +91,5 @@ void	ft_l_double_red(t_tree *tree, t_data *envi)
 	free(tree->right->strs[0]);
 	tree->right->strs[0] = ft_strdup(var.s);
 	free_vars(&var);
+	free(var.str);
 }

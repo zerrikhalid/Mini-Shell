@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 14:54:42 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/27 14:56:03 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/29 14:17:05 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ static	char	**init_w(char const *s1, char c)
 	char	**s2;
 
 	j = 0;
+	s2 = NULL;
 	while (*s1)
 	{
 		while (*s1 == c)
@@ -53,7 +54,8 @@ static	char	**init_w(char const *s1, char c)
 			s1++;
 		j += 1;
 	}
-	s2 = (char **)malloc(sizeof(char *) * (j + 1));
+	if (j > 0)
+		s2 = (char **)malloc(sizeof(char *) * (j + 1));
 	if (!s2)
 		return (NULL);
 	s2[j] = NULL;

@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 14:22:15 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/28 14:45:59 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/29 22:15:44 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	free_tree(t_tree *tree)
 {
 	if (!tree)
 		return ;
-	if(tree->strs[0] && ft_strcmp(tree->strs[0], "<<"))
+	if (tree->strs[0] && ft_strcmp(tree->strs[0], "<<"))
 		unlink(tree->right->strs[0]);
 	free_tree(tree->left);
 	free_all(tree->strs);
@@ -33,7 +33,7 @@ void	free_vars(t_vars *var)
 
 void	free_var(char *str)
 {
-	if (str && *str)
+	if (str)
 		free(str);
 }
 
@@ -42,9 +42,8 @@ void	free_all(char **args)
 	int	i;
 
 	i = -1;
-	if (!args[0])
+	if (!args)
 		return ;
-	printf("hello\n");
 	while (args[++i])
 		free(args[i]);
 	free(args);

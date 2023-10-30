@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 14:21:09 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/28 14:13:56 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/29 02:52:54 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 void	push_to_s(char *tmp, int j, char *str, char *s)
 {
+	char	*fr;
+
+	fr = tmp;
 	if (!tmp)
 		return ;
 	if (j >= 1 && s[j - 1] && s[j - 1] != ' ' && *tmp == ' ')
@@ -24,6 +27,7 @@ void	push_to_s(char *tmp, int j, char *str, char *s)
 		s[j++] = *tmp++;
 	if (*str && (*str == ' ' || !*str) && *(tmp - 1) == ' ')
 		s[j - 1] = 0;
+	free_var(fr);
 }
 
 int	flag(t_tree *tree)
@@ -49,8 +53,6 @@ char	*clean_str(char *str, t_data *env, t_tree *tree)
 		{
 			var.tmp = get_var_value(str, &var.i, env);
 			push_to_s(var.tmp, var.j, &str[var.i], var.s);
-			if (var.tmp && *var.tmp)
-				free(var.tmp);
 			continue ;
 		}
 		else
@@ -70,7 +72,7 @@ void	expand(t_tree *tree, t_data *env, char **environement)
 	v.c = -1;
 	while (tree->strs[++v.c])
 		v.len += allocation(tree->strs[v.c], env);
-	v.strs = (char **)calloc((v.i * v.len) + 1, sizeof(char *));
+	v.strs = (char **)ft_calloc((v.i * v.len) + 1, sizeof(char *));
 	v.i = -1;
 	v.j = 0;
 	while (tree->strs[++v.i])

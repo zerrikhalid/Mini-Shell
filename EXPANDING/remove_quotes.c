@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 10:37:50 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/28 14:06:58 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/29 21:51:11 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ char	*remove_quotes(char *str)
 	}
 	return (free(str), s);
 }
+
 char	*remove_quotes_h(char *str, int *x)
 {
 	char	*s;
@@ -76,11 +77,11 @@ char	*remove_quotes_h(char *str, int *x)
 
 char	*clean_str_h(char *str, t_data *envi)
 {
-	t_var var;
+	t_var	var;
 
 	var.i = 0;
 	var.y = allocation(str, envi);
-	var.s = (char *)ft_calloc(var.j + 1, 1);
+	var.s = (char *)ft_calloc(var.y + 1, 1);
 	var.j = 0;
 	var.fr = var.tmp;
 	while (str[var.i])

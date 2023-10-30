@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 14:33:55 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/27 14:50:52 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/29 13:36:06 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ static	char	**init_w(char *s1)
 	char	**s2;
 
 	j = 0;
+	s2 = NULL;
 	while (*s1)
 	{
 		while (*s1 && (*s1 == ' ' || *s1 == '\t'))
@@ -53,7 +54,8 @@ static	char	**init_w(char *s1)
 			s1++;
 		j += 1;
 	}
-	s2 = (char **)malloc(sizeof(char *) * (j + 1));
+	if (j > 0)
+		s2 = (char **)calloc((j + 1), sizeof(char *));
 	if (!s2)
 		return (NULL);
 	s2[j] = NULL;
@@ -103,11 +105,7 @@ char	**ft_strtok(char *s)
 		while (*s && (*s == ' ' || *s == '\t'))
 			s++;
 		while (*s && (*s != ' ' && *s != '\t'))
-		{
-			p[j][k] = *s;
-			s++;
-			k++;
-		}
+			p[j][k++] = *s++;
 		if (p[j] != 0)
 			p[j][k] = '\0';
 		j++;

@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 18:37:02 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/28 03:59:23 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/28 22:31:46 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_right_red(t_tree *tree, t_data *envi, char **env)
 	if (expand_redir(tree->right, envi, env))
 		return ;
 	backup_fd = dup(STDOUT_FILENO);
-	fd = open(tree->right->strs[0], O_CREAT | O_RDWR | O_TRUNC, 0644);
+	fd = open(tree->right->strs[0], O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (fd < 0)
 	{
 		perror(tree->right->strs[0]);
