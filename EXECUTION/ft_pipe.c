@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 15:37:47 by kzerri            #+#    #+#             */
-/*   Updated: 2023/11/01 11:08:39 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/11/01 23:46:14 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,19 +61,13 @@ void	ft_pipe(t_tree *tree, t_data *envi, char **env)
 	if (pipe(fds) < 0)
 		exit(1);
 	pid1 = fork();
-	if(pid1 < 0)
-	{
-		perror("fork : ");
-		exit(1);
-	}
+	if (pid1 < 0)
+		ft_er_fork();
 	if (!pid1)
 		left(tree, fds, envi, env);
 	pid2 = fork();
-	if(pid2 < 0)
-	{
-		perror("fork : ");
-		exit(1);
-	}
+	if (pid2 < 0)
+		ft_er_fork();
 	if (!pid2)
 		right(tree, fds, envi, env);
 	close(fds[0]);

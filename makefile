@@ -10,7 +10,7 @@ header	=	minishell.h
 
 CC			=	gcc
 
-CFLAGS		=	$(CIFLAGS) -Wall -Wextra -Werror  -lreadline  -fsanitize=address -g
+CFLAGS		=	$(CIFLAGS) -Wall -Wextra -Werror  -lreadline 
 RM			=	rm -rf
 
 SRCS		=	lib/ft_strlen.c \
@@ -34,6 +34,7 @@ SRCS		=	lib/ft_strlen.c \
 				PARSER/isValide.c\
 				PARSER/error_print.c\
 				PARSER/ft_split2.c\
+				PARSER/final_cmd.c\
 				AST/build_tree.c\
 				AST/get_herdoc.c\
 				EXECUTION/execution.c\
@@ -43,6 +44,7 @@ SRCS		=	lib/ft_strlen.c \
 				EXECUTION/right_double_r.c\
 				EXECUTION/left_r.c\
 				EXECUTION/right_r.c\
+				EXECUTION/ft_er_fork.c\
 				EXPANDING/create_new_str.c\
 				EXPANDING/expanding.c\
 				EXPANDING/get_var_value.c\
@@ -68,10 +70,10 @@ SRCS		=	lib/ft_strlen.c \
 OBJS		= $(SRCS:.c=.o)
 
 $(NAME)		: $(OBJS) $(header)
-			$(CC)  -fsanitize=address $(CFLAGS) $(OBJS)  $(LDFLAGS) -o $(NAME)
+			$(CC) $(CFLAGS) $(OBJS)  $(LDFLAGS) -o $(NAME)
 
 %o:%c $(header)
-	$(CC) -fsanitize=address -g $(CIFLAGS)  -c $< -o $@
+	$(CC)  $(CIFLAGS)  -c $< -o $@
 
 all			:	$(NAME)
 

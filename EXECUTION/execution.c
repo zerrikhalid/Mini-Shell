@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 14:20:38 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/31 21:55:33 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/11/01 23:46:46 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,8 @@ void	cmd_execute(t_tree *tree, t_data *envi, char **env)
 	int	pid;
 
 	pid = fork();
-	if(pid < 0){
-		perror("fork :");
-		exit(1);
-	}
+	if (pid < 0)
+		ft_er_fork();
 	if (!pid)
 	{
 		signal(SIGINT, SIG_DFL);
@@ -59,7 +57,6 @@ void	check_builtin(t_tree *tree, t_data **envi, char **environement)
 
 void	execute(t_tree *tree, t_data **env, char **environement)
 {
-	int a;
 	if (!tree)
 		return ;
 	if (ft_strcmp(tree->strs[0], "|"))

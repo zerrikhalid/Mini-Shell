@@ -1,33 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   final_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/09 16:42:24 by araji-af          #+#    #+#             */
-/*   Updated: 2023/11/01 23:45:19 by kzerri           ###   ########.fr       */
+/*   Created: 2023/11/02 00:22:27 by kzerri            #+#    #+#             */
+/*   Updated: 2023/11/02 00:22:55 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	pwd(void)
+char	*final_str(char *str)
 {
-	char	*path;
+	char	*final;
+	char	*operators;
+	int		index;
+	int		size;
+	char	*tmp;
 
-	path = getcwd(NULL, 0);
-	if (!path)
-	{
-		path = getenv("PWD");
-		printf("%s\n", path);
-		return (0);
-	}
-	else if (path)
-	{
-		printf("%s\n", path);
-		free(path);
-		return (0);
-	}
-	return (1);
+	tmp = ft_strtrim(str, " \t\n");
+	free(str);
+	str = NULL;
+	str = tmp;
+	size = ft_strlen(tmp);
+	operators = "<|>";
+	final = ft_calloc((size * 2) + 1, 1);
+	index = 0;
+	if (!final)
+		return (NULL);
+	while (*tmp && index < size * 2)
+		fill_final(&final, &tmp, &index, operators);
+	return (free(str), final);
 }
