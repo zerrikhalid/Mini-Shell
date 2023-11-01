@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 16:56:24 by araji-af          #+#    #+#             */
-/*   Updated: 2023/10/20 14:17:01 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/31 18:10:55 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	cd_home(char *path, t_data **envi, int flag)
 	else
 	{
 		tmp = get_variable(*envi, "HOME");
-		if (!tmp->value)
+		if (!tmp || !tmp->value)
 			ft_printf("Minishell: cd: HOME not set\n");
 		else
 		{
@@ -130,7 +130,8 @@ int	cd(char *pathe, t_data **envi)
 	char	*str;
 
 	r_type = 0;
-	(*envi)->path = pathe;
+	if (envi && *envi)
+		(*envi)->path = pathe;
 	tmp = get_variable(*envi, "PWD");
 	tmp2 = get_variable(*envi, "OLDPWD");
 	if (tmp2)

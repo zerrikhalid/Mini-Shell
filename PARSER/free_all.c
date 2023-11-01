@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 14:22:15 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/29 22:15:44 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/31 16:33:04 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,7 @@ void	free_all(char **args)
 	int	i;
 
 	i = -1;
-	if (!args)
-		return ;
-	while (args[++i])
+	while (args && args[++i])
 		free(args[i]);
 	free(args);
 }

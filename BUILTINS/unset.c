@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 16:08:19 by araji-af          #+#    #+#             */
-/*   Updated: 2023/10/19 15:48:06 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/31 12:10:33 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,15 @@ t_data	*get_variable(t_data *envi, char *str)
 
 int	check_pos(t_data *envi, t_data *tmp)
 {
-	if (tmp == ft_lstlast(envi))
+	if (!envi)
+		return (3);
+	if (tmp == ft_lstlast(envi) && ft_lstsize(envi) > 1)
 		return (0);
 	else if (tmp == envi)
 		return (1);
 	else if (tmp)
 		return (2);
-	return (3);
+	return (4);
 }
 
 t_data	*get_before(t_data *envi, t_data *tmp)

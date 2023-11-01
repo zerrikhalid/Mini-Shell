@@ -10,8 +10,7 @@ header	=	minishell.h
 
 CC			=	gcc
 
-CFLAGS		=	$(CIFLAGS) -Wall -Wextra -Werror -ggdb3 -lreadline
-
+CFLAGS		=	$(CIFLAGS) -Wall -Wextra -Werror  -lreadline  -fsanitize=address -g
 RM			=	rm -rf
 
 SRCS		=	lib/ft_strlen.c \
@@ -64,14 +63,15 @@ SRCS		=	lib/ft_strlen.c \
 				BUILTINS/unset.c\
 				BUILTINS/utils.c\
 				BUILTINS/utils2.c\
+				BUILTINS/free_env.c
 
 OBJS		= $(SRCS:.c=.o)
 
 $(NAME)		: $(OBJS) $(header)
-			$(CC) $(CFLAGS) $(OBJS)  $(LDFLAGS) -o $(NAME)
+			$(CC)  -fsanitize=address $(CFLAGS) $(OBJS)  $(LDFLAGS) -o $(NAME)
 
 %o:%c $(header)
-	$(CC) -ggdb3 $(CIFLAGS) -c $< -o $@
+	$(CC) -fsanitize=address -g $(CIFLAGS)  -c $< -o $@
 
 all			:	$(NAME)
 

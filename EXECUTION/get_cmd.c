@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 13:55:36 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/29 21:38:11 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/31 16:38:48 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	**get_args(char *s, char **args, t_data *env)
 	}
 	if (!env)
 		return (NULL);
-	while (args[++i])
+	while (args && args[++i])
 	{
 		args[i] = ft_strjoin(args[i], "/");
 		args[i] = ft_strjoin(args[i], s);
@@ -45,7 +45,7 @@ char	*get_cmd(char *s, t_data *env)
 	{
 		args = get_args(s, args, env);
 		i = -1;
-		while (args[++i])
+		while (args && args[++i])
 		{
 			if (!access(args[i], F_OK | X_OK))
 			{

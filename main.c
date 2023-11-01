@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:07:31 by araji-af          #+#    #+#             */
-/*   Updated: 2023/10/29 15:37:30 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/31 22:31:09 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,15 @@ void	handler(int num)
 	close(fd[1]);
 }
 
+// void check_leaks(){
+// 	system("leaks minishell");
+// 	char *s = ft_itoa(getpid());
+// 	char *ss = ft_strjoin(ft_strdup("lsof -p "), s);
+// 	system(ss);
+// 	free(s);
+// 	free(ss);
+// }
+
 int	main(int ac, char **av, char **env)
 {
 	t_var	var;
@@ -64,7 +73,10 @@ int	main(int ac, char **av, char **env)
 		if (!var.cmd)
 			break ;
 		if (!*var.cmd)
+		{
+			free(var.cmd);
 			continue ;
+		}
 		add_history(var.cmd);
 		if (!*var.cmd || !is_valide(var.cmd))
 			continue ;
@@ -76,12 +88,15 @@ int	main(int ac, char **av, char **env)
 		{
 			g_status = 1;
 			free_tree(var.tree);
+			free_all(var.command);
 			continue ;
 		}
-		execute(var.tree, var.envi, env);
+		execute(var.tree, &var.envi, env);
 		free_tree(var.tree);
 		free_all(var.command);
 	}
 	close(var.fdbackup);
+	free_env(&var.envi);
+	// atexit(check_leaks);
 	return (0);
 }

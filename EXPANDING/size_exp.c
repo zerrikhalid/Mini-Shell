@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 10:34:53 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/29 21:51:28 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/31 22:46:29 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,11 @@ int	len(char *str, t_data *env)
 	i = 0;
 	while (*str)
 	{
+		
 		if (*str == ' ' || *str == '\'' || *str == '\"' || *str == '$')
 			break ;
-		tmp[i++] = *str++;
+		tmp[i++] = *str;
+		str++;
 	}
 	if (!*tmp)
 		return (free(tmp), 0);
@@ -54,5 +56,6 @@ int	allocation(char *str, t_data *env)
 			i += len(++str, env);
 		str++;
 	}
+	printf("%d\n", i);
 	return (i);
 }

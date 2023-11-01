@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 13:02:42 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/28 21:04:48 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/31 16:25:51 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ void	level2(t_tree **tree, char **strs, int start, char **cmd)
 		create_node(tree, NULL);
 		(*tree)->strs = cmd;
 	}
+	else
+		free_all(cmd);
 }
 
 void	level1(t_tree **tree, char **strs, int start)

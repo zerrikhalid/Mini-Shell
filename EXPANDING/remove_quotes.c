@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 10:37:50 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/29 21:51:11 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/31 13:08:48 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,13 @@ char	*clean_str_h(char *str, t_data *envi)
 	var.y = allocation(str, envi);
 	var.s = (char *)ft_calloc(var.y + 1, 1);
 	var.j = 0;
-	var.fr = var.tmp;
+	var.fr = NULL;
 	while (str[var.i])
 	{
 		if (str[var.i] == '$')
 		{
 			var.tmp = get_var_value(str, &var.i, envi);
+			var.fr = var.tmp;
 			while (*var.tmp)
 				var.s[var.j++] = *var.tmp++;
 			continue ;

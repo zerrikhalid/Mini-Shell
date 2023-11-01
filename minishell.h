@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 08:11:56 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/28 14:19:15 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/10/31 18:43:15 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ typedef struct s_v
 	int		y;
 }t_v;
 
-
 typedef struct s_data
 {
 	char			*variable;
@@ -83,20 +82,22 @@ typedef struct s_export
 	int		end;
 	int		end1;
 	char	*str;
+	int		status;
+	int		i;
 }t_export;
 
 typedef struct s_vars
 {
 	int		i;
-	int		start;
+	int		st;
 	int		j;
 	int		count;
 	char	c;
 	char	**splited;
-	int		in_quote;
+	int		iq;
 	char	*white_spaces;
 	char	*str;
-	char	*trimmed;
+	char	*tr;
 	char	*del;
 	int		fd;
 	int		backup_fd;
@@ -128,7 +129,7 @@ char	**level3(char **strs, char **cmd, int start);
 void	level2(t_tree **tree, char **strs, int start, char **cmd);
 void	level1(t_tree **tree, char **strs, int start);
 char	*ft_strdup(char *s1);
-void	execute(t_tree *tree, t_data *env, char **environement);
+void	execute(t_tree *tree, t_data **env, char **environement);
 void	cmd_execute(t_tree *tree, t_data *env, char **environement);
 char	*get_cmd(char *s, t_data *env);
 void	ft_right_red(t_tree *tree, t_data *envi, char **env);
@@ -175,7 +176,7 @@ char	*remove_quotes(char *str);
 int		allocation(char *str, t_data *env);
 int		create_new_str(char *str, char *s, int i, t_data *env);
 void	expand(t_tree *tree, t_data *env, char **environement);
-void	check_builtin(t_tree *tree, t_data *env, char **environement);
+void	check_builtin(t_tree *tree, t_data **env, char **environement);
 int		my_strcmp(char *s1, char *s2);
 int		ft_isalpha(int c);
 int		ft_isalnum(int c);
@@ -206,5 +207,7 @@ char	*ft_strncpy(char *s1, char *s2, int n);
 char	*clean_str_h(char *str, t_data *envi);
 void	free_vars(t_vars *var);
 void	free_var(char *str);
-
+int		ft_lstsize(t_data *lst);
+void	free_env(t_data **env);
+void	initialise_exp(t_export *exp);
 #endif
