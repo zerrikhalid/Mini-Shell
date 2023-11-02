@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 21:04:35 by araji-af          #+#    #+#             */
-/*   Updated: 2023/10/31 18:44:04 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/11/02 20:11:58 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 void	no_option_export(t_data *envi)
 {
+	if (!envi)
+		return ;
 	while (envi)
 	{
 		printf("declare -x %s", envi->variable);
-		if (envi->value)
+		if (envi && envi->value)
 			printf("=\"%s\"\n", envi->value);
 		else
 			printf("\n");
@@ -69,10 +71,7 @@ void	create_update(t_export *exp, char *av, t_data **envi)
 			ft_lstadd_back(envi, exp->tmp);
 	}
 	else
-	{
-		free(exp->tmp->value);
 		exp->tmp->value = ft_substr(av, exp->end + 1, exp->end1);
-	}
 }
 
 int	export(char **av, t_data **envi)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   remove_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rghouzra <rghouzra@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 10:37:50 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/31 13:08:48 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/11/02 17:42:50 by rghouzra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ char	*clean_str_h(char *str, t_data *envi)
 	{
 		if (str[var.i] == '$')
 		{
+			free(var.fr);
 			var.tmp = get_var_value(str, &var.i, envi);
 			var.fr = var.tmp;
 			while (*var.tmp)

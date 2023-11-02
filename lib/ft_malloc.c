@@ -1,40 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_env.c                                         :+:      :+:    :+:   */
+/*   ft_malloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/31 17:33:08 by araji-af          #+#    #+#             */
-/*   Updated: 2023/11/02 20:06:43 by kzerri           ###   ########.fr       */
+/*   Created: 2023/11/02 18:14:47 by kzerri            #+#    #+#             */
+/*   Updated: 2023/11/02 18:15:18 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	initialise_exp(t_export *exp)
+void	*ft_malloc(size_t b)
 {
-	exp->i = 0;
-	exp->status = 0;
-	exp->str = NULL;
-	exp->tmp = NULL;
-}
+	void	*p;
 
-void	free_env(t_data **env)
-{
-	t_data	*tmp;
-
-	if (!env)
-		return ;
-	while (*env)
-	{
-		tmp = *env;
-		*env = (*env)->next;
-		if (tmp->variable)
-			free(tmp->variable);
-		if (tmp->value)
-			free(tmp->value);
-		if (tmp)
-			free(tmp);
-	}
+	p = malloc(b);
+	if (!p)
+		exit(1);
+	return (p);
 }

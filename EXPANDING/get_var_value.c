@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_var_value.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rghouzra <rghouzra@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 10:39:49 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/29 22:37:12 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/11/02 17:56:57 by rghouzra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ void	free_strs(char **strs)
 	free(strs);
 }
 
-char	*var_search(t_data *env, char *tmp, int len)
+char	*var_search(t_data *env, char *tmp)
 {
 	int	i;
 
 	i = -1;
 	while (env)
 	{
-		if (!ft_strncmp(env->variable, tmp, len))
+		if (ft_strcmp(env->variable, tmp))
 		{
 			if (!*env->value)
 				return (free(tmp), NULL);
@@ -67,6 +67,6 @@ char	*get_var_value(char *str, int *x, t_data *env)
 	if (!*tmp)
 		return (tmp);
 	len = ft_strlen(tmp);
-	tmp = var_search(env, tmp, len);
+	tmp = var_search(env, tmp);
 	return (tmp);
 }

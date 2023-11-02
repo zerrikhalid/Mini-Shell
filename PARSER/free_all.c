@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 14:22:15 by kzerri            #+#    #+#             */
-/*   Updated: 2023/11/02 14:20:41 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/11/02 20:09:46 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ void	cleanup(t_var *var, int x)
 		free_tree(var->tree);
 		free_all(var->command);
 	}
-	else if (x == 1)
+	else
 	{
 		close(var->fdbackup);
-		free_env(&var->envi);
+		// free_env(&var->envi);
 	}
 }
