@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:07:31 by araji-af          #+#    #+#             */
-/*   Updated: 2023/11/02 00:29:50 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/11/02 16:33:42 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,13 @@ void	prepare_minishell(t_var *var)
 
 int	read_and_validate_command(t_var *var)
 {
-	if (!*var->cmd || !is_valide(var->cmd))
+	if (!*var->cmd)
 	{
 		free(var->cmd);
 		return (1);
 	}
+	if (!is_valide(var->cmd))
+		return (1);
 	return (0);
 }
 

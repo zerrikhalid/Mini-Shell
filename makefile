@@ -8,9 +8,9 @@ CIFLAGS= -I$(RLP)/include
 
 header	=	minishell.h
 
-CC			=	gcc
+CC			=	cc
 
-CFLAGS		=	$(CIFLAGS) -Wall -Wextra -Werror  -lreadline 
+CFLAGS		=	$(CIFLAGS) -Wall -Wextra -Werror  -lreadline -g
 RM			=	rm -rf
 
 SRCS		=	lib/ft_strlen.c \
@@ -21,6 +21,7 @@ SRCS		=	lib/ft_strlen.c \
 				lib/ft_strcmp.c\
 				lib/ft_strtrim.c\
 				lib/ft_calloc.c\
+				lib/ft_strncpy.c\
 				lib/ft_putstr_fd.c\
 				lib/ft_strncmp.c\
 				lib/ft_split.c\
@@ -73,7 +74,7 @@ $(NAME)		: $(OBJS) $(header)
 			$(CC) $(CFLAGS) $(OBJS)  $(LDFLAGS) -o $(NAME)
 
 %o:%c $(header)
-	$(CC)  $(CIFLAGS)  -c $< -o $@
+	$(CC)  -g $(CIFLAGS)  -c $< -o $@
 
 all			:	$(NAME)
 
