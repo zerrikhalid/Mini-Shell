@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 14:20:38 by kzerri            #+#    #+#             */
-/*   Updated: 2023/11/02 18:19:28 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/11/02 15:11:45 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	cmd_execute(t_tree *tree, t_data *envi, char **env)
 		if (ft_strchar(tree->strs[0], '/'))
 			tree->strs[0] = get_cmd(tree->strs[0], envi);
 		execve(tree->strs[0], tree->strs, env);
-		perror(strerror(errno));
+		puts(strerror(errno));
 		exit(1);
 	}
 	waitpid(pid, &g_status, 0);

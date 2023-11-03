@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 08:11:56 by kzerri            #+#    #+#             */
-/*   Updated: 2023/11/02 16:37:56 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/11/02 23:45:04 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,4 +214,5 @@ void	initialise_exp(t_export *exp);
 void	ft_er_fork(void);
 void	cleanup(t_var *var, int x);
 void	end_exec(char *s, char **args);
+void	*ft_malloc(size_t b);
 #endif

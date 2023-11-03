@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:07:31 by araji-af          #+#    #+#             */
-/*   Updated: 2023/11/02 20:15:22 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/11/03 00:07:45 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,6 @@ int	main(int ac, char **av, char **env)
 		}
 		execute(var.tree, &var.envi, env);
 		cleanup(&var, 0);
-		puts("-----------------------52661520");
 	}
 	cleanup(&var, 1);
-	free_env(&var.envi);
 }

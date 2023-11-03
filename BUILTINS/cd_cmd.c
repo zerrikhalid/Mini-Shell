@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 16:56:24 by araji-af          #+#    #+#             */
-/*   Updated: 2023/11/02 18:16:38 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/11/03 02:48:59 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,8 @@ int	cd_home2(char *path, t_data **envi)
 void	update_pwd(t_data **env, t_data **tmp, t_data **tmp2, char *str)
 {
 	if (tmp == NULL || *tmp == NULL)
-		return ;
-	if ((*env)->path && (*env)->path[0] == '-')
+		*tmp = get_variable(*env, "HOME");
+	if ((*env)->path && (*env)->path[0] == '-' && tmp && *tmp)
 	{
 		(*tmp2)->value = (*tmp)->value;
 		(*tmp)->value = str;
@@ -115,7 +115,7 @@ void	update_pwd(t_data **env, t_data **tmp, t_data **tmp2, char *str)
 		}
 		if (!*tmp2)
 		{
-			*tmp2 = ft_mylstnew("OLDPWD", str);
+			*tmp2 = ft_mylstnew(ft_strdup("OLDPWD"), str);
 			ft_lstadd_back(env, *tmp2);
 		}
 		else

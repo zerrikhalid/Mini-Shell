@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 17:46:20 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/14 16:45:56 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/11/02 23:44:20 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	*ft_calloc(size_t count, size_t size)
 {
 	void	*ptr;
 
-	ptr = (void *)malloc(size * count);
+	ptr = (void *)ft_malloc(size * count);
 	if (!ptr)
 		return (NULL);
 	ft_bzero(ptr, count * size);

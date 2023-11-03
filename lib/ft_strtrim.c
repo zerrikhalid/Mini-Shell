@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 17:50:47 by kzerri            #+#    #+#             */
-/*   Updated: 2023/09/25 18:16:57 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/11/02 23:44:20 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*ft_strtrim(char *s1, char *set)
 		start++;
 	while (ft_strchr(set, (s1[end - 1])) && end - start > 0)
 		end--;
-	new = (char *)malloc(sizeof (char) * (end - start + 1));
+	new = (char *)ft_malloc(sizeof (char) * (end - start + 1));
 	if (!new)
 		return (NULL);
 	ft_strlcpy(new, &s1[start], end - start + 1);

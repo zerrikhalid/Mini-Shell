@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 13:02:42 by kzerri            #+#    #+#             */
-/*   Updated: 2023/10/31 16:25:51 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/11/02 23:44:20 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	create_node(t_tree **node, char *s)
 {
-	*node = (t_tree *)malloc(sizeof(t_tree));
+	*node = (t_tree *)ft_malloc(sizeof(t_tree));
 	if (!node)
 		exit(1);
 	(*node)->left = NULL;

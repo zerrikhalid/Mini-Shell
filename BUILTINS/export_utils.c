@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 14:37:31 by araji-af          #+#    #+#             */
-/*   Updated: 2023/11/02 19:09:04 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/11/03 01:08:36 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,4 +88,6 @@ void	create_new_var(t_export *exp, char *av, t_data **envi)
 		else
 			ft_lstadd_back(envi, exp->tmp);
 	}
+	else
+		free(av);
 }

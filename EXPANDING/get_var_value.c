@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_var_value.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rghouzra <rghouzra@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 10:39:49 by kzerri            #+#    #+#             */
-/*   Updated: 2023/11/02 17:56:57 by rghouzra         ###   ########.fr       */
+/*   Updated: 2023/11/02 23:45:46 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*var_search(t_data *env, char *tmp)
 	{
 		if (ft_strcmp(env->variable, tmp))
 		{
-			if (!*env->value)
+			if (!env->value)
 				return (free(tmp), NULL);
 			free(tmp);
 			tmp = ft_strdup(env->value);

@@ -11,9 +11,9 @@ header	=	minishell.h
 CC			=	cc
 
 ASAN = -fsanitize=address
-# ASAN = 
+ASAN = 
 
-CFLAGS		=	$(CIFLAGS) -Wall -Wextra -Werror -lreadline   -g $(ASAN)
+CFLAGS		=	$(CIFLAGS) -Wall -Wextra -Werror $(ASAN) -lreadline -g
 RM			=	rm -rf
 
 SRCS		=	lib/ft_strlen.c \
@@ -23,6 +23,7 @@ SRCS		=	lib/ft_strlen.c \
 				lib/ft_strlcpy.c\
 				lib/ft_strcmp.c\
 				lib/ft_strtrim.c\
+				lib/ft_malloc.c\
 				lib/ft_calloc.c\
 				lib/ft_strncpy.c\
 				lib/ft_putstr_fd.c\
@@ -77,7 +78,7 @@ $(NAME)		: $(OBJS) $(header)
 			$(CC) $(CFLAGS) $(OBJS)  $(LDFLAGS) -o $(NAME)
 
 %o:%c $(header)
-	$(CC) -g $(ASAN) $(CIFLAGS)  -c $< -o $@
+	$(CC) $(ASAN) -g $(CIFLAGS)  -c $< -o $@
 
 all			:	$(NAME)
 
