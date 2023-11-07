@@ -6,7 +6,7 @@
 /*   By: kzerri <kzerri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 08:11:56 by kzerri            #+#    #+#             */
-/*   Updated: 2023/11/02 23:45:04 by kzerri           ###   ########.fr       */
+/*   Updated: 2023/11/04 11:50:09 by kzerri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,13 @@
 # include <signal.h>
 
 int	g_status;
+
+typedef struct s_cd
+{
+	int		r_type;
+	char	*tmp;
+	char	*str;
+}t_cd;
 
 typedef struct s_tree
 {
@@ -183,7 +190,7 @@ int		ft_isalpha(int c);
 int		ft_isalnum(int c);
 int		ft_isdigit(int c);
 char	*my_strjoin(char *s1, char *s2);
-void	update_pwd(t_data **env, t_data **tmp, t_data **tmp2, char *str);
+void	update_pwd(t_data **env, t_cd var, t_data **tmp, t_data **tmp2);
 int		ft_atoi(char *str);
 int		ft_exit(char **av);
 int		is_format(char half_form);

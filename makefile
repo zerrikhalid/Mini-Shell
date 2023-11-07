@@ -10,10 +10,8 @@ header	=	minishell.h
 
 CC			=	cc
 
-ASAN = -fsanitize=address
-ASAN = 
+CFLAGS		=	$(CIFLAGS) -Wall -Wextra -Werror
 
-CFLAGS		=	$(CIFLAGS) -Wall -Wextra -Werror $(ASAN) -lreadline -g
 RM			=	rm -rf
 
 SRCS		=	lib/ft_strlen.c \
@@ -75,10 +73,10 @@ SRCS		=	lib/ft_strlen.c \
 OBJS		= $(SRCS:.c=.o)
 
 $(NAME)		: $(OBJS) $(header)
-			$(CC) $(CFLAGS) $(OBJS)  $(LDFLAGS) -o $(NAME)
+			$(CC) $(CFLAGS) -lreadline $(OBJS)  $(LDFLAGS) -o $(NAME)
 
 %o:%c $(header)
-	$(CC) $(ASAN) -g $(CIFLAGS)  -c $< -o $@
+	$(CC) $(CIFLAGS) $(CFLAGS)  -c $< -o $@
 
 all			:	$(NAME)
 
@@ -86,8 +84,6 @@ cm			:	all clean
 	
 clean		:
 			$(RM) $(OBJS)
-
-mc			: all clean
 
 fclean		: clean
 			$(RM) $(NAME)
