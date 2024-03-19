@@ -46,7 +46,7 @@ Minishell provides a number of features that allow users to interact with their 
 - File redirection: Minishell supports input and output redirection, allowing users to read from and write to files as part of their commands.
 - Piping: Minishell supports piping, allowing users to chain multiple commands together and pass the output of one command as the input to another.
 - Environment variable expansion: Minishell supports environment variable expansion, allowing users to reference environment variables in their commands.
-- Built-in commands: Minishell provides a number of built-in commands, including `cd`, `echo`, `env`, `exit`, and `setenv`, which allow users to perform common tasks without needing to invoke external programs.
+- Built-in commands: Minishell provides a number of built-in commands, including `cd`, `echo`, `env`, `exit`, `pwd`, `export`, and `unset`, which allow users to perform common tasks without needing to invoke external programs.
 
 ## Acknowledgements
 
